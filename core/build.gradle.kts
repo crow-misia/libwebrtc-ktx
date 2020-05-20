@@ -121,6 +121,18 @@ publishing {
                         distribution.set(Maven.licenseDist)
                     }
                 }
+
+                withXml {
+                    asNode().appendNode("dependencies").let {
+                        for (dependency in configurations["api"].dependencies) {
+                            it.appendNode("dependency").apply {
+                                appendNode("groupId", dependency.group)
+                                appendNode("artifactId", dependency.name)
+                                appendNode("version", dependency.version)
+                            }
+                        }
+                    }
+                }
             }
         }
     }
