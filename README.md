@@ -11,7 +11,7 @@ Useful classes for developing apps using libwebrtc.
 
 Add dependencies (you can also add other modules that you need):
 
-`${latest.version}` is [![Download](https://api.bintray.com/packages/zncmn/maven/libmediasoup-android/images/download.svg)](https://bintray.com/zncmn/maven/libwebrtc-ktx/_latestVersion)
+`${latest.version}` is [![Download](https://api.bintray.com/packages/zncmn/maven/libwebrtc-ktx/images/download.svg)](https://bintray.com/zncmn/maven/libwebrtc-ktx/_latestVersion)
 
 ```groovy
 dependencies {
