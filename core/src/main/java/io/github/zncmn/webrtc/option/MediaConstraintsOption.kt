@@ -9,9 +9,14 @@ import org.webrtc.VideoEncoderFactory
 class MediaConstraintsOption {
     companion object {
         const val ECHO_CANCELLATION_CONSTRAINT = "googEchoCancellation"
+        const val EXPERIMENTAL_ECHO_CANCELLATION_CONSTRAINT = "googEchoCancellation2"
         const val AUTO_GAIN_CONTROL_CONSTRAINT = "googAutoGainControl"
-        const val HIGH_PASS_FILTER_CONSTRAINT = "googHighpassFilter"
+        const val EXPERIMENTAL_AUTO_GAIN_CONTROL_CONSTRAINT = "googAutoGainControl2"
         const val NOISE_SUPPRESSION_CONSTRAINT = "googNoiseSuppression"
+        const val EXPERIMENTAL_NOISE_SUPPRESSION_CONSTRAINT = "googNoiseSuppression2"
+        const val HIGH_PASS_FILTER_CONSTRAINT = "googHighpassFilter"
+        const val AUDIO_MIRRORING_CONSTRAINT = "googAudioMirroring"
+        const val TYPING_NOISE_DETECTION_CONSTRAINT = "googTypingNoiseDetection"
     }
 
     enum class AudioCodec {
@@ -52,6 +57,16 @@ class MediaConstraintsOption {
      * 入力音声のノイズ抑制処理の有無の設定
      */
     var audioProcessingNoiseSuppression: Boolean = true
+
+    /**
+     * 入力音声のタイピングノイズ検知処理の有無の設定
+     */
+    var audioProcessingTypingNoiseDetection: Boolean = false
+
+    /**
+     * 入力音声の左右チャンネルを入れ替える設定
+     */
+    var audioProcessingAudioMirroring: Boolean = false
 
     /**
      * 音声ソースの指定

@@ -3,19 +3,23 @@
 package io.github.zncmn.webrtc
 
 import android.app.Application
-import org.webrtc.Logging
-import org.webrtc.PeerConnectionFactory
+import io.github.zncmn.webrtc.log.WebRtcLogger
+import org.webrtc.*
+import org.webrtc.LoggingUtils
 
-inline fun Application.initializePeerConnectionFactory(useTracer: Boolean = false,
-                                                       fieldTrials: String? = null,
-                                                       libwebrtcLoggingEnable: Boolean = false) {
+fun Application.initializePeerConnectionFactory(useTracer: Boolean = false,
+                                                fieldTrials: String? = null,
+                                                libwebrtcLoggingSeverity: Logging.Severity = Logging.Severity.LS_NONE,
+                                                nativeLibraryName: String = "jingle_peerconnection_so") {
     val options = PeerConnectionFactory.InitializationOptions
         .builder(this)
         .setFieldTrials(fieldTrials)
         .setEnableInternalTracer(useTracer)
+        .setNativeLibraryName(nativeLibraryName)
         .createInitializationOptions()
     PeerConnectionFactory.initialize(options)
-    if (libwebrtcLoggingEnable) {
-        Logging.enableLogToDebugOutput(Logging.Severity.LS_INFO)
-    }
+
+    LoggingUtils.injectLoggable(Loggable { message, severity, tag ->
+        severity.toLogLevel()?.also { WebRtcLogger.println(it, tag, message) }
+    }, libwebrtcLoggingSeverity)
 }
