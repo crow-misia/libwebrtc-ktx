@@ -50,21 +50,47 @@ class RTCLocalAudioManagerImpl : RTCLocalAudioManager {
 
     private fun createSourceConstraints(option: MediaConstraintsOption): MediaConstraints {
         val constraints = MediaConstraints()
-        if (!option.audioProcessingEchoCancellation) {
-            constraints.mandatory.add(
-                MediaConstraints.KeyValuePair(MediaConstraintsOption.ECHO_CANCELLATION_CONSTRAINT, "false"))
+        // echo cancellation
+        if (option.audioProcessingEchoCancellation) {
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.ECHO_CANCELLATION_CONSTRAINT, "true"))
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.EXPERIMENTAL_ECHO_CANCELLATION_CONSTRAINT, "true"))
+        } else {
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.ECHO_CANCELLATION_CONSTRAINT, "false"))
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.EXPERIMENTAL_ECHO_CANCELLATION_CONSTRAINT, "false"))
         }
-        if(!option.audioProcessingAutoGainControl) {
-            constraints.mandatory.add(
-                MediaConstraints.KeyValuePair(MediaConstraintsOption.AUTO_GAIN_CONTROL_CONSTRAINT, "false"))
+        // auto gain control
+        if (option.audioProcessingAutoGainControl) {
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.AUTO_GAIN_CONTROL_CONSTRAINT, "true"))
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.EXPERIMENTAL_AUTO_GAIN_CONTROL_CONSTRAINT, "true"))
+        } else {
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.AUTO_GAIN_CONTROL_CONSTRAINT, "false"))
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.EXPERIMENTAL_AUTO_GAIN_CONTROL_CONSTRAINT, "false"))
         }
-        if (!option.audioProcessingHighpassFilter) {
-            constraints.mandatory.add(
-                MediaConstraints.KeyValuePair(MediaConstraintsOption.HIGH_PASS_FILTER_CONSTRAINT, "false"))
+        // highpass filter
+        if (option.audioProcessingHighpassFilter) {
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.HIGH_PASS_FILTER_CONSTRAINT, "true"))
+        } else {
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.HIGH_PASS_FILTER_CONSTRAINT, "false"))
         }
-        if (!option.audioProcessingNoiseSuppression) {
-            constraints.mandatory.add(
-                MediaConstraints.KeyValuePair(MediaConstraintsOption.NOISE_SUPPRESSION_CONSTRAINT, "false"))
+        // noise suppression
+        if (option.audioProcessingNoiseSuppression) {
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.NOISE_SUPPRESSION_CONSTRAINT, "true"))
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.EXPERIMENTAL_NOISE_SUPPRESSION_CONSTRAINT, "true"))
+        } else {
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.NOISE_SUPPRESSION_CONSTRAINT, "false"))
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.EXPERIMENTAL_NOISE_SUPPRESSION_CONSTRAINT, "false"))
+        }
+        // typing noise detection
+        if (option.audioProcessingTypingNoiseDetection) {
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.TYPING_NOISE_DETECTION_CONSTRAINT, "true"))
+        } else {
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.TYPING_NOISE_DETECTION_CONSTRAINT, "false"))
+        }
+        // audio mirroring
+        if (option.audioProcessingAudioMirroring) {
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.AUDIO_MIRRORING_CONSTRAINT, "true"))
+        } else {
+            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.AUDIO_MIRRORING_CONSTRAINT, "false"))
         }
         return constraints
     }

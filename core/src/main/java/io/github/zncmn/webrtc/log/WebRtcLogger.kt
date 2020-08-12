@@ -86,4 +86,9 @@ object WebRtcLogger {
     fun e(tag: String?, t: Throwable?) {
         handler.log(Log.ERROR, tag, t, null)
     }
+
+    @JvmStatic
+    fun println(priority: Int, tag: String?, message: String?) {
+        handler.log(priority, tag, null, message)
+    }
 }

@@ -60,7 +60,7 @@ android {
 
 dependencies {
     api(kotlin("stdlib"))
-    api(Deps.webrtc)
+    implementation(Deps.webrtc)
 }
 
 val sourcesJar by tasks.creating(Jar::class) {
