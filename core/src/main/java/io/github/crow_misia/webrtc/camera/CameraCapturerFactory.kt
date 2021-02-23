@@ -1,9 +1,9 @@
 @file:Suppress("unused")
 
-package io.github.zncmn.webrtc.camera
+package io.github.crow_misia.webrtc.camera
 
 import android.content.Context
-import io.github.zncmn.webrtc.log.WebRtcLogger
+import io.github.crow_misia.webrtc.log.WebRtcLogger
 import org.webrtc.Camera1Enumerator
 import org.webrtc.Camera2Enumerator
 import org.webrtc.CameraEnumerator

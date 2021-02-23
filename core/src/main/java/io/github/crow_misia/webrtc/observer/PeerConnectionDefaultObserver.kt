@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
-package io.github.zncmn.webrtc.observer
+package io.github.crow_misia.webrtc.observer
 
 import org.webrtc.*
 

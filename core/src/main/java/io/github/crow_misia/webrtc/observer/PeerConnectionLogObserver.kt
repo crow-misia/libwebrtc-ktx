@@ -1,8 +1,8 @@
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
-package io.github.zncmn.webrtc.observer
+package io.github.crow_misia.webrtc.observer
 
-import io.github.zncmn.webrtc.log.WebRtcLogger
+import io.github.crow_misia.webrtc.log.WebRtcLogger
 import org.webrtc.*
 
 inline fun PeerConnection.Observer.wrapLog(tag: String): PeerConnection.Observer {

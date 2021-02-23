@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package io.github.zncmn.webrtc.log
+package io.github.crow_misia.webrtc.log
 
 import android.util.Log
 

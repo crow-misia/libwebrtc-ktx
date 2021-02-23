@@ -1,9 +1,9 @@
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
-package io.github.zncmn.webrtc
+package io.github.crow_misia.webrtc
 
 import android.app.Application
-import io.github.zncmn.webrtc.log.WebRtcLogger
+import io.github.crow_misia.webrtc.log.WebRtcLogger
 import org.webrtc.*
 import org.webrtc.LoggingUtils
 

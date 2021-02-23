@@ -1,9 +1,9 @@
 @file:Suppress("unused")
 
-package io.github.zncmn.webrtc
+package io.github.crow_misia.webrtc
 
-import io.github.zncmn.webrtc.log.WebRtcLogger
-import io.github.zncmn.webrtc.option.MediaConstraintsOption
+import io.github.crow_misia.webrtc.log.WebRtcLogger
+import io.github.crow_misia.webrtc.option.MediaConstraintsOption
 import org.webrtc.*
 import java.util.*
 

@@ -1,5 +1,5 @@
 object Maven {
-    const val groupId = "io.github.zncmn.webrtc"
+    const val groupId = "io.github.crow-misia.libwebrtc"
     const val artifactId = "libwebrtc-ktx"
     const val name = "libwebrtc-ktx"
     const val desc = "Libwebrtc Kotlin Extensions"

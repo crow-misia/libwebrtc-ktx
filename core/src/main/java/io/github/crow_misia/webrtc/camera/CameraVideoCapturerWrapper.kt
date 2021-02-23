@@ -1,4 +1,4 @@
-package io.github.zncmn.webrtc.camera
+package io.github.crow_misia.webrtc.camera
 
 import android.content.Context
 import org.webrtc.CameraVideoCapturer

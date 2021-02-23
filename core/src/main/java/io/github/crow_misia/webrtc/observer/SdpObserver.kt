@@ -1,4 +1,4 @@
-package io.github.zncmn.webrtc.observer
+package io.github.crow_misia.webrtc.observer
 
 import org.webrtc.SdpObserver
 import org.webrtc.SessionDescription
