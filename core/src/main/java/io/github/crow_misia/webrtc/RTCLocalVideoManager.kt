@@ -15,6 +15,7 @@ interface RTCLocalVideoManager {
     fun initTrack(factory: PeerConnectionFactory,
                   option: MediaConstraintsOption,
                   appContext: Context)
+    fun attachTrackToStream(stream: MediaStream)
     fun switchCamera(switchHandler: CameraVideoCapturer.CameraSwitchHandler?)
     fun dispose()
 }
@@ -26,6 +27,7 @@ class RTCNoneLocalVideoManager : RTCLocalVideoManager {
     override fun initTrack(factory: PeerConnectionFactory,
                            option: MediaConstraintsOption,
                            appContext: Context) { }
+    override fun attachTrackToStream(stream: MediaStream) { }
     override fun switchCamera(switchHandler: CameraVideoCapturer.CameraSwitchHandler?) { }
     override fun dispose() { }
 }
@@ -60,6 +62,11 @@ class RTCLocalVideoManagerImpl(
         track?.setEnabled(true)
     }
 
+    override fun attachTrackToStream(stream: MediaStream) {
+        WebRtcLogger.d(TAG, "attachTrackToStream")
+        track?.also { stream.addTrack(it) }
+    }
+
     override fun switchCamera(switchHandler: CameraVideoCapturer.CameraSwitchHandler?) {
         WebRtcLogger.d(TAG, "switchCam %s", capturer::class.simpleName)
 
@@ -70,8 +77,8 @@ class RTCLocalVideoManagerImpl(
 
     override fun dispose() {
         WebRtcLogger.d(TAG, "dispose")
-
         WebRtcLogger.d(TAG, "dispose surfaceTextureHelper")
+
         surfaceTextureHelper?.dispose()
         surfaceTextureHelper = null
 

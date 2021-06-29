@@ -9,16 +9,18 @@ import java.util.*
 
 interface RTCLocalAudioManager {
     val track: MediaStreamTrack?
-    var enabled: Boolean
 
+    fun enabled(): Boolean
+    fun setEnabled(enable: Boolean): Boolean
     fun initTrack(factory: PeerConnectionFactory, option: MediaConstraintsOption)
     fun dispose()
 }
 
 class RTCNoneLocalAudioManager : RTCLocalAudioManager {
     override val track: MediaStreamTrack? = null
-    override var enabled: Boolean = false
 
+    override fun enabled() = false
+    override fun setEnabled(enable: Boolean) = false
     override fun initTrack(factory: PeerConnectionFactory, option: MediaConstraintsOption) = Unit
     override fun dispose() = Unit
 }
@@ -29,12 +31,12 @@ class RTCLocalAudioManagerImpl : RTCLocalAudioManager {
     }
 
     private var source: AudioSource? = null
+
     override var track:  AudioTrack?  = null
+        private set
 
-    override var enabled: Boolean
-        get() = track?.enabled() ?: false
-        set(value) { track?.setEnabled(value) }
-
+    override fun enabled() = track?.enabled() ?: false
+    override fun setEnabled(enable: Boolean) = track?.setEnabled(enable) ?: false
     override fun initTrack(factory: PeerConnectionFactory, option: MediaConstraintsOption) {
         WebRtcLogger.d(TAG, "initTrack")
 
@@ -49,50 +51,24 @@ class RTCLocalAudioManagerImpl : RTCLocalAudioManager {
     }
 
     private fun createSourceConstraints(option: MediaConstraintsOption): MediaConstraints {
-        val constraints = MediaConstraints()
-        // echo cancellation
-        if (option.audioProcessingEchoCancellation) {
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.ECHO_CANCELLATION_CONSTRAINT, "true"))
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.EXPERIMENTAL_ECHO_CANCELLATION_CONSTRAINT, "true"))
-        } else {
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.ECHO_CANCELLATION_CONSTRAINT, "false"))
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.EXPERIMENTAL_ECHO_CANCELLATION_CONSTRAINT, "false"))
+        return MediaConstraints().apply {
+            // echo cancellation
+            addMandatory(MediaConstraintsOption.ECHO_CANCELLATION_CONSTRAINT, option.audioProcessingEchoCancellation)
+            // auto gain control
+            addMandatory(MediaConstraintsOption.AUTO_GAIN_CONTROL_CONSTRAINT, option.audioProcessingAutoGainControl)
+            // experimental auto gain control
+            addMandatory(MediaConstraintsOption.EXPERIMENTAL_AUTO_GAIN_CONTROL_CONSTRAINT, option.audioProcessingExperimentalAGC)
+            // highpass filter
+            addMandatory(MediaConstraintsOption.HIGH_PASS_FILTER_CONSTRAINT, option.audioProcessingHighpassFilter)
+            // noise suppression
+            addMandatory(MediaConstraintsOption.NOISE_SUPPRESSION_CONSTRAINT, option.audioProcessingNoiseSuppression)
+            // experimental noise suppression
+            addMandatory(MediaConstraintsOption.EXPERIMENTAL_NOISE_SUPPRESSION_CONSTRAINT, option.audioProcessingExperimentalNS)
+            // typing noise detection
+            addMandatory(MediaConstraintsOption.TYPING_NOISE_DETECTION_CONSTRAINT, option.audioProcessingTypingNoiseDetection)
+            // audio mirroring
+            addMandatory(MediaConstraintsOption.AUDIO_MIRRORING_CONSTRAINT, option.audioProcessingAudioMirroring)
         }
-        // auto gain control
-        if (option.audioProcessingAutoGainControl) {
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.AUTO_GAIN_CONTROL_CONSTRAINT, "true"))
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.EXPERIMENTAL_AUTO_GAIN_CONTROL_CONSTRAINT, "true"))
-        } else {
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.AUTO_GAIN_CONTROL_CONSTRAINT, "false"))
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.EXPERIMENTAL_AUTO_GAIN_CONTROL_CONSTRAINT, "false"))
-        }
-        // highpass filter
-        if (option.audioProcessingHighpassFilter) {
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.HIGH_PASS_FILTER_CONSTRAINT, "true"))
-        } else {
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.HIGH_PASS_FILTER_CONSTRAINT, "false"))
-        }
-        // noise suppression
-        if (option.audioProcessingNoiseSuppression) {
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.NOISE_SUPPRESSION_CONSTRAINT, "true"))
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.EXPERIMENTAL_NOISE_SUPPRESSION_CONSTRAINT, "true"))
-        } else {
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.NOISE_SUPPRESSION_CONSTRAINT, "false"))
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.EXPERIMENTAL_NOISE_SUPPRESSION_CONSTRAINT, "false"))
-        }
-        // typing noise detection
-        if (option.audioProcessingTypingNoiseDetection) {
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.TYPING_NOISE_DETECTION_CONSTRAINT, "true"))
-        } else {
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.TYPING_NOISE_DETECTION_CONSTRAINT, "false"))
-        }
-        // audio mirroring
-        if (option.audioProcessingAudioMirroring) {
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.AUDIO_MIRRORING_CONSTRAINT, "true"))
-        } else {
-            constraints.mandatory.add(MediaConstraints.KeyValuePair(MediaConstraintsOption.AUDIO_MIRRORING_CONSTRAINT, "false"))
-        }
-        return constraints
     }
 
     override fun dispose() {
@@ -108,5 +84,10 @@ class RTCLocalAudioManagerImpl : RTCLocalAudioManager {
         WebRtcLogger.d(TAG, "dispose source")
         source?.dispose()
         source = null
+    }
+
+    private fun MediaConstraints.addMandatory(name: String, value: Boolean) {
+        val valueString = if (value) "true" else "false"
+        mandatory.add(MediaConstraints.KeyValuePair(name, valueString))
     }
 }

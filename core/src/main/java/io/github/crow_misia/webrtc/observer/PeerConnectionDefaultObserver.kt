@@ -1,4 +1,4 @@
-@file:Suppress("NOTHING_TO_INLINE", "unused")
+@file:Suppress("unused")
 
 package io.github.crow_misia.webrtc.observer
 
@@ -26,8 +26,4 @@ interface PeerConnectionDefaultObserver : PeerConnection.Observer {
     override fun onIceConnectionReceivingChange(receiving: Boolean) { }
 
     override fun onAddTrack(receiver: RtpReceiver, mediaStreams: Array<out MediaStream>) { }
-
-    override fun onTrack(transceiver: RtpTransceiver) { }
-
-    override fun onConnectionChange(newState: PeerConnection.PeerConnectionState) { }
 }

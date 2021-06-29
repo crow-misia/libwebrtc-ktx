@@ -9,14 +9,13 @@ import org.webrtc.VideoEncoderFactory
 class MediaConstraintsOption {
     companion object {
         const val ECHO_CANCELLATION_CONSTRAINT = "googEchoCancellation"
-        const val EXPERIMENTAL_ECHO_CANCELLATION_CONSTRAINT = "googEchoCancellation2"
         const val AUTO_GAIN_CONTROL_CONSTRAINT = "googAutoGainControl"
         const val EXPERIMENTAL_AUTO_GAIN_CONTROL_CONSTRAINT = "googAutoGainControl2"
         const val NOISE_SUPPRESSION_CONSTRAINT = "googNoiseSuppression"
         const val EXPERIMENTAL_NOISE_SUPPRESSION_CONSTRAINT = "googNoiseSuppression2"
         const val HIGH_PASS_FILTER_CONSTRAINT = "googHighpassFilter"
-        const val AUDIO_MIRRORING_CONSTRAINT = "googAudioMirroring"
         const val TYPING_NOISE_DETECTION_CONSTRAINT = "googTypingNoiseDetection"
+        const val AUDIO_MIRRORING_CONSTRAINT = "googAudioMirroring"
     }
 
     enum class AudioCodec {
@@ -25,7 +24,9 @@ class MediaConstraintsOption {
 
     enum class VideoCodec {
         H264,
-        VP9
+        VP8,
+        VP9,
+        AV1
     }
 
     /**
@@ -49,6 +50,11 @@ class MediaConstraintsOption {
     var audioProcessingAutoGainControl: Boolean = true
 
     /**
+     * 入力音声の実験的自動ゲイン調整処理の有無の設定
+     */
+    var audioProcessingExperimentalAGC: Boolean = true
+
+    /**
      * 入力音声のハイパスフィルタ処理の有無の設定
      */
     var audioProcessingHighpassFilter: Boolean = true
@@ -57,6 +63,11 @@ class MediaConstraintsOption {
      * 入力音声のノイズ抑制処理の有無の設定
      */
     var audioProcessingNoiseSuppression: Boolean = true
+
+    /**
+     * 入力音声の実験的ノイズ抑制処理の有無の設定
+     */
+    var audioProcessingExperimentalNS: Boolean = true
 
     /**
      * 入力音声のタイピングノイズ検知処理の有無の設定

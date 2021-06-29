@@ -7,9 +7,13 @@ import org.webrtc.SurfaceTextureHelper
 
 class CameraVideoCapturerWrapper(
     private val capturer: CameraVideoCapturer,
-    private val fixedResolution: Boolean = false
+    private val fixedResolution: Boolean = false,
 ) : CameraVideoCapturer {
-    override fun initialize(surfaceTextureHelper: SurfaceTextureHelper?, context: Context?, capturerObserver: CapturerObserver?) {
+    override fun initialize(
+        surfaceTextureHelper: SurfaceTextureHelper?,
+        context: Context?,
+        capturerObserver: CapturerObserver?,
+    ) {
         capturer.initialize(surfaceTextureHelper, context, capturerObserver)
     }
 
@@ -29,7 +33,10 @@ class CameraVideoCapturerWrapper(
         capturer.switchCamera(switchEventsHandler)
     }
 
-    override fun switchCamera(switchEventsHandler: CameraVideoCapturer.CameraSwitchHandler?, cameraName: String?) {
+    override fun switchCamera(
+        switchEventsHandler: CameraVideoCapturer.CameraSwitchHandler?,
+        cameraName: String?,
+    ) {
         capturer.switchCamera(switchEventsHandler, cameraName)
     }
 

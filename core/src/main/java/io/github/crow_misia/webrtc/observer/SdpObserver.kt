@@ -9,7 +9,7 @@ import kotlin.coroutines.resumeWithException
 sealed class BaseSdpObserver<T>(
     protected val continuation: Continuation<T>
 ) : SdpObserver {
-    override fun onCreateSuccess(sdp: SessionDescription) = Unit
+    override fun onCreateSuccess(desc: SessionDescription) = Unit
     override fun onCreateFailure(error: String) {
         continuation.resumeWithException(SdpObserverException(error))
     }
@@ -22,17 +22,17 @@ sealed class BaseSdpObserver<T>(
 class CreateSdpObserver(
     continuation: Continuation<SessionDescription>
 ) : BaseSdpObserver<SessionDescription>(continuation) {
-    override fun onCreateSuccess(sdp: SessionDescription) {
-        continuation.resume(sdp)
+    override fun onCreateSuccess(desc: SessionDescription) {
+        continuation.resume(desc)
     }
 }
 
 class SetSdpObserver(
-    private val sdp: SessionDescription,
+    private val desc: SessionDescription,
     continuation: Continuation<SessionDescription>
 ) : BaseSdpObserver<SessionDescription>(continuation) {
     override fun onSetSuccess() {
-        continuation.resume(sdp)
+        continuation.resume(desc)
     }
 }
 

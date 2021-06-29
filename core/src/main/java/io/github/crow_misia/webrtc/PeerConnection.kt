@@ -9,17 +9,17 @@ import org.webrtc.PeerConnection
 import org.webrtc.SessionDescription
 import kotlin.coroutines.suspendCoroutine
 
-suspend inline fun PeerConnection.setLocalDescription(sdp: SessionDescription): SessionDescription {
+suspend inline fun PeerConnection.setLocalDescription(desc: SessionDescription): SessionDescription {
     return suspendCoroutine {
-        val observer = SetSdpObserver(sdp, it)
-        setLocalDescription(observer, sdp)
+        val observer = SetSdpObserver(desc, it)
+        setLocalDescription(observer, desc)
     }
 }
 
-suspend inline fun PeerConnection.setRemoteDescription(sdp: SessionDescription): SessionDescription {
+suspend inline fun PeerConnection.setRemoteDescription(desc: SessionDescription): SessionDescription {
     return suspendCoroutine {
-        val observer = SetSdpObserver(sdp, it)
-        setRemoteDescription(observer, sdp)
+        val observer = SetSdpObserver(desc, it)
+        setRemoteDescription(observer, desc)
     }
 }
 

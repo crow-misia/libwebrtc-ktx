@@ -11,7 +11,7 @@ inline fun PeerConnection.Observer.wrapLog(tag: String): PeerConnection.Observer
 
 class LogPeerConnectionObserver(
     private val tag: String,
-    private val observer: PeerConnection.Observer
+    private val observer: PeerConnection.Observer,
 ) : PeerConnection.Observer {
     override fun onSignalingChange(newState: PeerConnection.SignalingState) {
         WebRtcLogger.d(tag, "onSignalingChange [newState:%s]", newState)
@@ -54,7 +54,7 @@ class LogPeerConnectionObserver(
     }
 
     override fun onIceCandidatesRemoved(candidates: Array<out IceCandidate>) {
-        WebRtcLogger.d(tag, "onIceCandidatesRemoved [candidatess:%d]", candidates.size)
+        WebRtcLogger.d(tag, "onIceCandidatesRemoved [candidates:%d]", candidates.size)
         observer.onIceCandidatesRemoved(candidates)
     }
 
@@ -76,5 +76,15 @@ class LogPeerConnectionObserver(
     override fun onConnectionChange(newState: PeerConnection.PeerConnectionState) {
         WebRtcLogger.d(tag, "onConnectionChange [newState:%s]", newState)
         observer.onConnectionChange(newState)
+    }
+
+    override fun onSelectedCandidatePairChanged(event: CandidatePairChangeEvent) {
+        WebRtcLogger.d(tag, "onSelectedCandidatePairChanged [event:%s]", event)
+        observer.onSelectedCandidatePairChanged(event)
+    }
+
+    override fun onStandardizedIceConnectionChange(newState: PeerConnection.IceConnectionState) {
+        WebRtcLogger.d(tag, "onStandardizedIceConnectionChange [newState:%s]", newState)
+        observer.onStandardizedIceConnectionChange(newState)
     }
 }
