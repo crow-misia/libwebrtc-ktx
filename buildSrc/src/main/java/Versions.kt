@@ -7,7 +7,7 @@ object Versions {
     const val compileSdk = 30
     const val minSdk = 21
 
-    const val core = "1.0.0"
+    const val core = "1.1.0"
 
     const val webrtc = "93.4577.0.0"
 }
