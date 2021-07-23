@@ -30,9 +30,7 @@ fun Application.initializePeerConnectionFactory(
 }
 
 private fun generateInjectableLogger(loggableSeverity: Logging.Severity): Loggable? {
-    return if (loggableSeverity == Logging.Severity.LS_NONE) {
-        null
-    } else {
+    return loggableSeverity.toLogLevel()?.let {
         Loggable { message, severity, tag ->
             severity.toLogLevel()?.also { WebRtcLogger.println(it, tag, message) }
         }
