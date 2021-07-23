@@ -1,7 +1,7 @@
 object Versions {
-    const val kotlin = "1.5.10"
-    const val gradlePlugin = "4.2.1"
-    const val dokkaPlugin = "1.4.32"
+    const val kotlin = "1.5.21"
+    const val gradlePlugin = "4.2.2"
+    const val dokkaPlugin = "1.5.0"
 
     const val buildTools = "30.0.3"
     const val compileSdk = 30
@@ -9,5 +9,5 @@ object Versions {
 
     const val core = "1.0.0"
 
-    const val webrtc = "92.4515.9.0"
+    const val webrtc = "93.4577.0.0"
 }
