@@ -114,8 +114,11 @@ class RTCComponentFactory(
             .setAudioRecordErrorCallback(audioRecordErrorCallback)
             .setAudioTrackErrorCallback(audioTrackErrorCallback)
             .setAudioSource(option.audioSource)
+            .setAudioFormat(option.audioFormat)
+            .setAudioAttributes(option.audioAttributes)
             .setUseStereoInput(option.useStereoInput)
             .setUseStereoOutput(option.useStereoOutput)
+            .setUseLowLatency(option.useLowLatency)
             .createAudioDeviceModule()
     }
 

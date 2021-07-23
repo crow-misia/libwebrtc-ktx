@@ -1,5 +1,7 @@
 package io.github.crow_misia.webrtc.option
 
+import android.media.AudioAttributes
+import android.media.AudioFormat
 import android.media.MediaRecorder
 import org.webrtc.EglBase
 import org.webrtc.VideoCapturer
@@ -85,6 +87,11 @@ class MediaConstraintsOption {
     var audioSource: Int = MediaRecorder.AudioSource.MIC
 
     /**
+     * 音声フォーマット
+     */
+    var audioFormat: Int = AudioFormat.ENCODING_PCM_16BIT
+
+    /**
      * ステレオ入力
      */
     var useStereoInput: Boolean = false
@@ -93,6 +100,11 @@ class MediaConstraintsOption {
      * ステレオ出力
      */
     var useStereoOutput: Boolean = false
+
+    /**
+     * 音声低遅延設定 (Android API 26以降で有効)
+     */
+    var useLowLatency: Boolean = false
 
     internal var audioDownstreamEnabled = false
     internal var audioUpstreamEnabled = false
@@ -103,6 +115,11 @@ class MediaConstraintsOption {
      * 音声コーデック
      */
     var audioCodec: AudioCodec = AudioCodec.OPUS
+
+    /**
+     * 音声属性 (Android API 21以降で有効)
+     */
+    var audioAttributes: AudioAttributes? = null
 
     /**
      * 映像コーデック
