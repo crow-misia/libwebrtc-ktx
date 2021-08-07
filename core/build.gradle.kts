@@ -1,4 +1,3 @@
-import com.android.build.gradle.*
 import org.jetbrains.dokka.gradle.DokkaTask
 import java.net.URI
 
@@ -10,19 +9,34 @@ plugins {
     id("maven-publish")
 }
 
+object Maven {
+    const val groupId = "io.github.crow-misia.libwebrtc"
+    const val artifactId = "libwebrtc-ktx"
+    const val name = "libwebrtc-ktx"
+    const val desc = "Libwebrtc Kotlin Extensions"
+    const val version = "1.1.0"
+    const val siteUrl = "https://github.com/crow-misia/libwebrtc-ktx"
+    const val issueTrackerUrl = "https://github.com/crow-misia/libwebrtc-ktx/issues"
+    const val gitUrl = "https://github.com/crow-misia/libwebrtc-ktx.git"
+    const val githubRepo = "crow-misia/libwebrtc-ktx"
+    const val licenseName = "The Apache Software License, Version 2.0"
+    const val licenseUrl = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+    const val licenseDist = "repo"
+}
+
 group = Maven.groupId
-version = Versions.core
+version = Maven.version
 
 android {
-    buildToolsVersion(Versions.buildTools)
-    compileSdkVersion(Versions.compileSdk)
+    buildToolsVersion = "31.0.0"
+    compileSdk = 31
 
     defaultConfig {
-        minSdkVersion(Versions.minSdk)
+        minSdk = 21
         consumerProguardFiles("consumer-proguard-rules.pro")
     }
 
-    lintOptions {
+    lint {
         textReport = true
         textOutput("stdout")
     }
@@ -35,11 +49,9 @@ android {
 
     buildTypes {
         getByName("debug") {
-            isDebuggable = true
             isJniDebuggable = true
         }
         getByName("release") {
-            isDebuggable = false
             isJniDebuggable = false
         }
     }
@@ -61,7 +73,7 @@ android {
 
 dependencies {
     api(kotlin("stdlib"))
-    compileOnly(Deps.webrtc)
+    compileOnly("com.github.crow-misia:libwebrtc-bin:_")
 }
 
 val sourcesJar by tasks.creating(Jar::class) {
@@ -76,7 +88,7 @@ val customDokkaTask by tasks.creating(DokkaTask::class) {
         noAndroidSdkLink.set(false)
     }
     dependencies {
-        plugins("org.jetbrains.dokka:javadoc-plugin:${Versions.dokkaPlugin}")
+        plugins("org.jetbrains.dokka:javadoc-plugin:_")
     }
     inputs.dir("src/main/java")
     outputDirectory.set(buildDir.resolve("javadoc"))
@@ -98,7 +110,6 @@ afterEvaluate {
 
                 groupId = Maven.groupId
                 artifactId = Maven.artifactId
-                version = Versions.core
 
                 println("""
                     |Creating maven publication
@@ -119,7 +130,7 @@ afterEvaluate {
                         val scmUrl = "scm:git:${Maven.gitUrl}"
                         connection.set(scmUrl)
                         developerConnection.set(scmUrl)
-                        url.set(this@pom.url)
+                        url.set(Maven.gitUrl)
                         tag.set("HEAD")
                     }
 
@@ -147,7 +158,7 @@ afterEvaluate {
             maven {
                 val releasesRepoUrl = URI("https://oss.sonatype.org/service/local/staging/deploy/maven2")
                 val snapshotsRepoUrl = URI("https://oss.sonatype.org/content/repositories/snapshots")
-                url = if (Versions.core.endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
+                url = if (Maven.version.endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
                 val sonatypeUsername: String? by project
                 val sonatypePassword: String? by project
                 credentials {
