@@ -14,7 +14,7 @@ object Maven {
     const val artifactId = "libwebrtc-ktx"
     const val name = "libwebrtc-ktx"
     const val desc = "Libwebrtc Kotlin Extensions"
-    const val version = "1.1.0"
+    const val version = "1.2.0"
     const val siteUrl = "https://github.com/crow-misia/libwebrtc-ktx"
     const val issueTrackerUrl = "https://github.com/crow-misia/libwebrtc-ktx/issues"
     const val gitUrl = "https://github.com/crow-misia/libwebrtc-ktx.git"
@@ -48,23 +48,23 @@ android {
     }
 
     buildTypes {
-        getByName("debug") {
+        debug {
             isJniDebuggable = true
         }
-        getByName("release") {
+        release {
             isJniDebuggable = false
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility(JavaVersion.VERSION_11)
+        targetCompatibility(JavaVersion.VERSION_11)
     }
 
     kotlin {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict", "-module-name", "libwebrtc-ktx")
-            jvmTarget = "1.8"
+            jvmTarget = "11"
             apiVersion = "1.5"
             languageVersion = "1.5"
         }
@@ -72,7 +72,7 @@ android {
 }
 
 dependencies {
-    api(kotlin("stdlib"))
+    api(Kotlin.stdlib.jdk8)
     compileOnly("com.github.crow-misia:libwebrtc-bin:_")
 }
 

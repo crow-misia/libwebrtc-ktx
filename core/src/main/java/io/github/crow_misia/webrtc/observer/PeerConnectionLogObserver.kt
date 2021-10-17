@@ -12,7 +12,7 @@ inline fun PeerConnection.Observer.wrapLog(tag: String): PeerConnection.Observer
 class LogPeerConnectionObserver(
     private val tag: String,
     private val observer: PeerConnection.Observer,
-) : PeerConnection.Observer {
+) : PeerConnection.Observer by observer {
     override fun onSignalingChange(newState: PeerConnection.SignalingState) {
         WebRtcLogger.d(tag, "onSignalingChange [newState:%s]", newState)
         observer.onSignalingChange(newState)
@@ -66,6 +66,11 @@ class LogPeerConnectionObserver(
     override fun onAddTrack(receiver: RtpReceiver, mediaStreams: Array<out MediaStream>) {
         WebRtcLogger.d(tag, "onAddTrack [receiver:%s, streams:%d]", receiver.id(), mediaStreams.size)
         observer.onAddTrack(receiver, mediaStreams)
+    }
+
+    override fun onRemoveTrack(receiver: RtpReceiver) {
+        WebRtcLogger.d(tag, "onRemoveTrack [receiver:%s]", receiver.id())
+        observer.onRemoveTrack(receiver)
     }
 
     override fun onTrack(transceiver: RtpTransceiver) {

@@ -8,9 +8,10 @@ import io.github.crow_misia.webrtc.option.MediaConstraintsOption
 import org.webrtc.*
 import org.webrtc.audio.AudioDeviceModule
 import org.webrtc.audio.JavaAudioDeviceModule
+import java.util.*
 
 class RTCComponentFactory(
-    private val option: MediaConstraintsOption
+    private val option: MediaConstraintsOption,
 ) {
     companion object {
         private val TAG = RTCComponentFactory::class.simpleName
@@ -122,9 +123,10 @@ class RTCComponentFactory(
             .createAudioDeviceModule()
     }
 
-    fun createVideoManager(): RTCLocalVideoManager {
+    @JvmOverloads
+    fun createVideoManager(trackIdGenerator: () -> String = { UUID.randomUUID().toString() }): RTCLocalVideoManager {
         val videoManager = option.videoCapturer?.let {
-            RTCLocalVideoManagerImpl(it)
+            RTCLocalVideoManagerImpl(it, trackIdGenerator)
         } ?: RTCNoneLocalVideoManager()
         WebRtcLogger.d(TAG, "videoManager created: %s", videoManager)
         return videoManager

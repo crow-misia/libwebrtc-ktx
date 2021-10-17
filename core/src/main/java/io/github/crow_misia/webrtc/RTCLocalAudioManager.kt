@@ -7,20 +7,19 @@ import io.github.crow_misia.webrtc.option.MediaConstraintsOption
 import org.webrtc.*
 import java.util.*
 
-interface RTCLocalAudioManager {
+sealed interface RTCLocalAudioManager {
     val track: MediaStreamTrack?
+    var enabled: Boolean
 
-    fun enabled(): Boolean
-    fun setEnabled(enable: Boolean): Boolean
     fun initTrack(factory: PeerConnectionFactory, option: MediaConstraintsOption)
     fun dispose()
 }
 
 class RTCNoneLocalAudioManager : RTCLocalAudioManager {
     override val track: MediaStreamTrack? = null
+    override var enabled: Boolean = false
+        set(_) { field = false }
 
-    override fun enabled() = false
-    override fun setEnabled(enable: Boolean) = false
     override fun initTrack(factory: PeerConnectionFactory, option: MediaConstraintsOption) = Unit
     override fun dispose() = Unit
 }
@@ -35,8 +34,10 @@ class RTCLocalAudioManagerImpl : RTCLocalAudioManager {
     override var track:  AudioTrack?  = null
         private set
 
-    override fun enabled() = track?.enabled() ?: false
-    override fun setEnabled(enable: Boolean) = track?.setEnabled(enable) ?: false
+    override var enabled
+        get() =  track?.enabled() ?: false
+        set(value) { track?.setEnabled(value) }
+
     override fun initTrack(factory: PeerConnectionFactory, option: MediaConstraintsOption) {
         WebRtcLogger.d(TAG, "initTrack")
 

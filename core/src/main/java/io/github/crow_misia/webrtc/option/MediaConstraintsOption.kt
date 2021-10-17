@@ -8,6 +8,7 @@ import org.webrtc.VideoCapturer
 import org.webrtc.VideoDecoderFactory
 import org.webrtc.VideoEncoderFactory
 
+@Suppress("MemberVisibilityCanBePrivate", "unused")
 class MediaConstraintsOption {
     companion object {
         const val ECHO_CANCELLATION_CONSTRAINT = "googEchoCancellation"

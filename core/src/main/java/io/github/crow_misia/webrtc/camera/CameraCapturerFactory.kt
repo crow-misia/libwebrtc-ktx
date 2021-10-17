@@ -41,13 +41,11 @@ object CameraCapturerFactory {
         preferenceFrontCamera: Boolean,
         eventsHandler: CameraVideoCapturer.CameraEventsHandler?,
     ): CameraVideoCapturer? {
-        val capturer = enumerator.deviceNames.asSequence()
-            .mapNotNull { deviceName -> findDeviceCamera(enumerator, deviceName, preferenceFrontCamera, eventsHandler) }
-            .firstOrNull()
+        val capturer = enumerator.deviceNames
+            .firstNotNullOfOrNull { deviceName -> findDeviceCamera(enumerator, deviceName, preferenceFrontCamera, eventsHandler) }
 
-        return capturer ?: enumerator.deviceNames.asSequence()
-            .mapNotNull { deviceName -> findDeviceCamera(enumerator, deviceName, preferenceFrontCamera, eventsHandler) }
-            .firstOrNull()
+        return capturer ?: enumerator.deviceNames
+            .firstNotNullOfOrNull { deviceName -> findDeviceCamera(enumerator, deviceName, preferenceFrontCamera, eventsHandler) }
     }
 
     private fun findDeviceCamera(

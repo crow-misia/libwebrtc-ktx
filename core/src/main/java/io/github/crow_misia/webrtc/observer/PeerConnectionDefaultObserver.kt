@@ -24,6 +24,4 @@ interface PeerConnectionDefaultObserver : PeerConnection.Observer {
     override fun onIceCandidatesRemoved(candidates: Array<out IceCandidate>) { }
 
     override fun onIceConnectionReceivingChange(receiving: Boolean) { }
-
-    override fun onAddTrack(receiver: RtpReceiver, mediaStreams: Array<out MediaStream>) { }
 }
