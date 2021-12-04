@@ -57,14 +57,14 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility(JavaVersion.VERSION_11)
-        targetCompatibility(JavaVersion.VERSION_11)
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     kotlin {
         kotlinOptions {
-            freeCompilerArgs = listOf("-Xjsr305=strict", "-module-name", "libwebrtc-ktx")
-            jvmTarget = "11"
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = "1.8"
             apiVersion = "1.5"
             languageVersion = "1.5"
         }
@@ -72,7 +72,8 @@ android {
 }
 
 dependencies {
-    api(Kotlin.stdlib.jdk8)
+    api(Kotlin.stdlib)
+    api(KotlinX.coroutines.core)
     compileOnly("com.github.crow-misia:libwebrtc-bin:_")
 }
 
@@ -122,7 +123,7 @@ afterEvaluate {
                 artifact(javadocJar)
 
                 pom {
-                    name.set(Maven.name)
+                    name.set(Maven.artifactId)
                     description.set(Maven.desc)
                     url.set(Maven.siteUrl)
 
