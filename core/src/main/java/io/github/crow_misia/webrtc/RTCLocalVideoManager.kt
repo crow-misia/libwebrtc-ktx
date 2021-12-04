@@ -21,7 +21,7 @@ sealed interface RTCLocalVideoManager {
     fun dispose()
 }
 
-class RTCNoneLocalVideoManager : RTCLocalVideoManager {
+object RTCNoneLocalVideoManager : RTCLocalVideoManager {
     override val track: MediaStreamTrack? = null
     override var enabled: Boolean = false
         set(_) { field = false }
@@ -47,7 +47,8 @@ class RTCLocalVideoManagerImpl(
     private var source: VideoSource? = null
     private var surfaceTextureHelper: SurfaceTextureHelper? = null
 
-    override var track:  VideoTrack?  = null
+    override var track: VideoTrack?  = null
+        private set
 
     override var enabled: Boolean
         get() = track?.enabled() ?: false
@@ -64,8 +65,10 @@ class RTCLocalVideoManagerImpl(
         }
 
         val trackId = trackIdGenerator()
-        track = factory.createVideoTrack(trackId, source)
-        track?.setEnabled(true)
+        track = factory.createVideoTrack(trackId, source)?.also {
+            it.setEnabled(true)
+            WebRtcLogger.d(TAG, "video track created: %s", it)
+        }
     }
 
     override fun attachTrackToStream(stream: MediaStream) {
@@ -96,8 +99,8 @@ class RTCLocalVideoManagerImpl(
 
     override fun dispose() {
         WebRtcLogger.d(TAG, "dispose")
-        WebRtcLogger.d(TAG, "dispose surfaceTextureHelper")
 
+        WebRtcLogger.d(TAG, "dispose surfaceTextureHelper")
         surfaceTextureHelper?.dispose()
         surfaceTextureHelper = null
 

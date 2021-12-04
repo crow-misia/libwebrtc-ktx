@@ -15,7 +15,7 @@ sealed interface RTCLocalAudioManager {
     fun dispose()
 }
 
-class RTCNoneLocalAudioManager : RTCLocalAudioManager {
+object RTCNoneLocalAudioManager : RTCLocalAudioManager {
     override val track: MediaStreamTrack? = null
     override var enabled: Boolean = false
         set(_) { field = false }
@@ -24,14 +24,16 @@ class RTCNoneLocalAudioManager : RTCLocalAudioManager {
     override fun dispose() = Unit
 }
 
-class RTCLocalAudioManagerImpl : RTCLocalAudioManager {
+class RTCLocalAudioManagerImpl(
+    private val trackIdGenerator: () -> String,
+) : RTCLocalAudioManager {
     companion object {
         private val TAG = RTCLocalAudioManagerImpl::class.simpleName
     }
 
     private var source: AudioSource? = null
 
-    override var track:  AudioTrack?  = null
+    override var track: AudioTrack?  = null
         private set
 
     override var enabled
@@ -44,11 +46,11 @@ class RTCLocalAudioManagerImpl : RTCLocalAudioManager {
         val constraints = createSourceConstraints(option)
         source = factory.createAudioSource(constraints)
         WebRtcLogger.d(TAG, "audio source created: %s", source)
-        val trackId = UUID.randomUUID().toString()
-        track = factory.createAudioTrack(trackId, source)
-        track?.setEnabled(true)
-
-        WebRtcLogger.d(TAG, "audio track created: %s", track)
+        val trackId = trackIdGenerator()
+        track = factory.createAudioTrack(trackId, source)?.also {
+            it.setEnabled(true)
+            WebRtcLogger.d(TAG, "audio track created: %s", it)
+        }
     }
 
     private fun createSourceConstraints(option: MediaConstraintsOption): MediaConstraints {
