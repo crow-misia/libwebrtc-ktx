@@ -2,7 +2,10 @@
 
 package io.github.crow_misia.webrtc.observer
 
-import org.webrtc.*
+import org.webrtc.DataChannel
+import org.webrtc.IceCandidate
+import org.webrtc.MediaStream
+import org.webrtc.PeerConnection
 
 interface PeerConnectionDefaultObserver : PeerConnection.Observer {
     override fun onSignalingChange(newState: PeerConnection.SignalingState) { }

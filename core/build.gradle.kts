@@ -12,7 +12,6 @@ plugins {
 object Maven {
     const val groupId = "io.github.crow-misia.libwebrtc"
     const val artifactId = "libwebrtc-ktx"
-    const val name = "libwebrtc-ktx"
     const val desc = "Libwebrtc Kotlin Extensions"
     const val version = "1.2.0"
     const val siteUrl = "https://github.com/crow-misia/libwebrtc-ktx"
