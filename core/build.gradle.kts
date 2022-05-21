@@ -1,19 +1,24 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 import java.net.URI
 
+val kotlin_version: String by extra
+
 plugins {
     id("com.android.library")
-    kotlin("android")
+    id("kotlin-android")
     id("org.jetbrains.dokka")
-    id("signing")
     id("maven-publish")
+    id("signing")
+}
+apply {
+    plugin("kotlin-android")
 }
 
 object Maven {
     const val groupId = "io.github.crow-misia.libwebrtc"
     const val artifactId = "libwebrtc-ktx"
     const val desc = "Libwebrtc Kotlin Extensions"
-    const val version = "1.3.0"
+    const val version = "1.4.0"
     const val siteUrl = "https://github.com/crow-misia/libwebrtc-ktx"
     const val issueTrackerUrl = "https://github.com/crow-misia/libwebrtc-ktx/issues"
     const val gitUrl = "https://github.com/crow-misia/libwebrtc-ktx.git"
@@ -27,8 +32,8 @@ group = Maven.groupId
 version = Maven.version
 
 android {
-    buildToolsVersion = "31.0.0"
-    compileSdk = 31
+    buildToolsVersion = "32.0.0"
+    compileSdk = 32
 
     defaultConfig {
         minSdk = 21
@@ -37,7 +42,7 @@ android {
 
     lint {
         textReport = true
-        textOutput("stdout")
+        checkDependencies = true
     }
 
     libraryVariants.all {
@@ -56,24 +61,24 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlin {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = "1.8"
-            apiVersion = "1.5"
-            languageVersion = "1.5"
+            jvmTarget = "11"
+            apiVersion = "1.6"
+            languageVersion = "1.6"
         }
     }
 }
 
 dependencies {
-    api(Kotlin.stdlib)
-    api(KotlinX.coroutines.core)
-    compileOnly("com.github.crow-misia:libwebrtc-bin:_")
+    implementation(Kotlin.stdlib)
+    implementation(KotlinX.coroutines.core)
+    compileOnly("com.github.crow-misia:libwebrtc-bin:_@aar")
 }
 
 val sourcesJar by tasks.creating(Jar::class) {
