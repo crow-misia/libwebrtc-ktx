@@ -1,17 +1,12 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 import java.net.URI
 
-val kotlin_version: String by extra
-
 plugins {
     id("com.android.library")
     id("kotlin-android")
     id("org.jetbrains.dokka")
     id("maven-publish")
     id("signing")
-}
-apply {
-    plugin("kotlin-android")
 }
 
 object Maven {
