@@ -13,7 +13,7 @@ object Maven {
     const val groupId = "io.github.crow-misia.libwebrtc"
     const val artifactId = "libwebrtc-ktx"
     const val desc = "Libwebrtc Kotlin Extensions"
-    const val version = "1.4.0"
+    const val version = "1.5.0"
     const val siteUrl = "https://github.com/crow-misia/libwebrtc-ktx"
     const val issueTrackerUrl = "https://github.com/crow-misia/libwebrtc-ktx/issues"
     const val gitUrl = "https://github.com/crow-misia/libwebrtc-ktx.git"
@@ -27,10 +27,11 @@ group = Maven.groupId
 version = Maven.version
 
 android {
-    buildToolsVersion = "32.0.0"
-    compileSdk = 32
+    buildToolsVersion = "33.0.0"
+    compileSdk = 33
 
     defaultConfig {
+        namespace = "io.github.crow_misia.webrtc"
         minSdk = 21
         consumerProguardFiles("consumer-proguard-rules.pro")
     }
@@ -64,8 +65,8 @@ android {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
             jvmTarget = "11"
-            apiVersion = "1.6"
-            languageVersion = "1.6"
+            apiVersion = "1.7"
+            languageVersion = "1.7"
         }
     }
 }
@@ -73,7 +74,7 @@ android {
 dependencies {
     implementation(Kotlin.stdlib)
     implementation(KotlinX.coroutines.core)
-    compileOnly("com.github.crow-misia:libwebrtc-bin:_@aar")
+    compileOnly(libs.libwebrtc.bin)
 }
 
 val sourcesJar by tasks.creating(Jar::class) {
@@ -88,7 +89,7 @@ val customDokkaTask by tasks.creating(DokkaTask::class) {
         noAndroidSdkLink.set(false)
     }
     dependencies {
-        plugins("org.jetbrains.dokka:javadoc-plugin:_")
+        plugins(libs.javadoc.plugin)
     }
     inputs.dir("src/main/java")
     outputDirectory.set(buildDir.resolve("javadoc"))
