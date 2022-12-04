@@ -2,13 +2,13 @@
 
 [plugins]
 
-org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.7.21" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.7.22" }
 
 gradle = { id = "gradle", version = "7.3.1" }
 
 [versions]
 
-kotlin = "1.7.21"
+kotlin = "1.7.22"
 
 [libraries]
 
@@ -16,7 +16,7 @@ dokka-gradle-plugin = "org.jetbrains.dokka:dokka-gradle-plugin:1.7.20"
 
 org-jacoco-ant = "org.jacoco:org.jacoco.ant:0.8.8"
 
-libwebrtc-bin = "com.github.crow-misia:libwebrtc-bin:108.5359.5.0"
+libwebrtc-bin = "com.github.crow-misia:libwebrtc-bin:109.5414.1.0"
 
 dokka-analysis = "org.jetbrains.dokka:dokka-analysis:1.7.20"
 

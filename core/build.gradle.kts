@@ -13,7 +13,7 @@ object Maven {
     const val groupId = "io.github.crow-misia.libwebrtc"
     const val artifactId = "libwebrtc-ktx"
     const val desc = "Libwebrtc Kotlin Extensions"
-    const val version = "1.5.0"
+    const val version = "1.6.0"
     const val siteUrl = "https://github.com/crow-misia/libwebrtc-ktx"
     const val issueTrackerUrl = "https://github.com/crow-misia/libwebrtc-ktx/issues"
     const val gitUrl = "https://github.com/crow-misia/libwebrtc-ktx.git"
@@ -27,7 +27,7 @@ group = Maven.groupId
 version = Maven.version
 
 android {
-    buildToolsVersion = "33.0.0"
+    buildToolsVersion = "33.0.1"
     compileSdk = 33
 
     defaultConfig {
@@ -44,15 +44,6 @@ android {
     libraryVariants.all {
         generateBuildConfigProvider?.configure {
             enabled = false
-        }
-    }
-
-    buildTypes {
-        debug {
-            isJniDebuggable = true
-        }
-        release {
-            isJniDebuggable = false
         }
     }
 
