@@ -11,14 +11,17 @@ import org.webrtc.VideoEncoderFactory
 @Suppress("MemberVisibilityCanBePrivate", "unused")
 class MediaConstraintsOption {
     companion object {
-        const val ECHO_CANCELLATION_CONSTRAINT = "googEchoCancellation"
-        const val AUTO_GAIN_CONTROL_CONSTRAINT = "googAutoGainControl"
-        const val EXPERIMENTAL_AUTO_GAIN_CONTROL_CONSTRAINT = "googAutoGainControl2"
-        const val NOISE_SUPPRESSION_CONSTRAINT = "googNoiseSuppression"
-        const val EXPERIMENTAL_NOISE_SUPPRESSION_CONSTRAINT = "googNoiseSuppression2"
-        const val HIGH_PASS_FILTER_CONSTRAINT = "googHighpassFilter"
-        const val TYPING_NOISE_DETECTION_CONSTRAINT = "googTypingNoiseDetection"
-        const val AUDIO_MIRRORING_CONSTRAINT = "googAudioMirroring"
+        const val ECHO_CANCELLATION_CONSTRAINT = "echoCancellation"
+        const val GOOG_ECHO_CANCELLATION_CONSTRAINT = "googEchoCancellation"
+        const val AUTO_GAIN_CONTROL_CONSTRAINT = "autoGainControl"
+        const val GOOG_AUTO_GAIN_CONTROL_CONSTRAINT = "googAutoGainControl"
+        const val GOOG_EXPERIMENTAL_AUTO_GAIN_CONTROL_CONSTRAINT = "googAutoGainControl2"
+        const val NOISE_SUPPRESSION_CONSTRAINT = "noiseSuppression"
+        const val GOOG_NOISE_SUPPRESSION_CONSTRAINT = "googNoiseSuppression"
+        const val GOOG_EXPERIMENTAL_NOISE_SUPPRESSION_CONSTRAINT = "googNoiseSuppression2"
+        const val GOOG_HIGH_PASS_FILTER_CONSTRAINT = "googHighpassFilter"
+        const val GOOG_TYPING_NOISE_DETECTION_CONSTRAINT = "googTypingNoiseDetection"
+        const val GOOG_AUDIO_MIRRORING_CONSTRAINT = "googAudioMirroring"
     }
 
     enum class AudioCodec {

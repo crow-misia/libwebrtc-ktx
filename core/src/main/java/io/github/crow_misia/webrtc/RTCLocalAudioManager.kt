@@ -57,20 +57,26 @@ class RTCLocalAudioManagerImpl(
         return MediaConstraints().apply {
             // echo cancellation
             addMandatory(MediaConstraintsOption.ECHO_CANCELLATION_CONSTRAINT, option.audioProcessingEchoCancellation)
+            // goog echo cancellation
+            addMandatory(MediaConstraintsOption.GOOG_ECHO_CANCELLATION_CONSTRAINT, option.audioProcessingEchoCancellation)
             // auto gain control
             addMandatory(MediaConstraintsOption.AUTO_GAIN_CONTROL_CONSTRAINT, option.audioProcessingAutoGainControl)
-            // experimental auto gain control
-            addMandatory(MediaConstraintsOption.EXPERIMENTAL_AUTO_GAIN_CONTROL_CONSTRAINT, option.audioProcessingExperimentalAGC)
-            // highpass filter
-            addMandatory(MediaConstraintsOption.HIGH_PASS_FILTER_CONSTRAINT, option.audioProcessingHighpassFilter)
+            // goog auto gain control
+            addMandatory(MediaConstraintsOption.GOOG_AUTO_GAIN_CONTROL_CONSTRAINT, option.audioProcessingAutoGainControl)
+            // goog experimental auto gain control
+            addMandatory(MediaConstraintsOption.GOOG_EXPERIMENTAL_AUTO_GAIN_CONTROL_CONSTRAINT, option.audioProcessingExperimentalAGC)
+            // goog highpass filter
+            addMandatory(MediaConstraintsOption.GOOG_HIGH_PASS_FILTER_CONSTRAINT, option.audioProcessingHighpassFilter)
             // noise suppression
             addMandatory(MediaConstraintsOption.NOISE_SUPPRESSION_CONSTRAINT, option.audioProcessingNoiseSuppression)
+            // goog noise suppression
+            addMandatory(MediaConstraintsOption.GOOG_NOISE_SUPPRESSION_CONSTRAINT, option.audioProcessingNoiseSuppression)
             // experimental noise suppression
-            addMandatory(MediaConstraintsOption.EXPERIMENTAL_NOISE_SUPPRESSION_CONSTRAINT, option.audioProcessingExperimentalNS)
-            // typing noise detection
-            addMandatory(MediaConstraintsOption.TYPING_NOISE_DETECTION_CONSTRAINT, option.audioProcessingTypingNoiseDetection)
-            // audio mirroring
-            addMandatory(MediaConstraintsOption.AUDIO_MIRRORING_CONSTRAINT, option.audioProcessingAudioMirroring)
+            addMandatory(MediaConstraintsOption.GOOG_EXPERIMENTAL_NOISE_SUPPRESSION_CONSTRAINT, option.audioProcessingExperimentalNS)
+            // goog typing noise detection
+            addMandatory(MediaConstraintsOption.GOOG_TYPING_NOISE_DETECTION_CONSTRAINT, option.audioProcessingTypingNoiseDetection)
+            // goog audio mirroring
+            addMandatory(MediaConstraintsOption.GOOG_AUDIO_MIRRORING_CONSTRAINT, option.audioProcessingAudioMirroring)
         }
     }
 
