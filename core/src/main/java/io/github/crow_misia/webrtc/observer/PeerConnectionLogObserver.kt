@@ -3,7 +3,13 @@
 package io.github.crow_misia.webrtc.observer
 
 import io.github.crow_misia.webrtc.log.WebRtcLogger
-import org.webrtc.*
+import org.webrtc.CandidatePairChangeEvent
+import org.webrtc.DataChannel
+import org.webrtc.IceCandidate
+import org.webrtc.MediaStream
+import org.webrtc.PeerConnection
+import org.webrtc.RtpReceiver
+import org.webrtc.RtpTransceiver
 
 inline fun PeerConnection.Observer.wrapLog(tag: String): PeerConnection.Observer {
     return LogPeerConnectionObserver(tag, this)

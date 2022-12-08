@@ -25,14 +25,14 @@ class MediaConstraintsOption {
     }
 
     enum class AudioCodec {
-        OPUS
+        OPUS,
     }
 
     enum class VideoCodec {
         H264,
         VP8,
         VP9,
-        AV1
+        AV1,
     }
 
     /**

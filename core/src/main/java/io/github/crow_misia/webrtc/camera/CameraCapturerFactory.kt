@@ -53,7 +53,7 @@ object CameraCapturerFactory {
         deviceName: String,
         frontFacing: Boolean,
         eventsHandler: CameraVideoCapturer.CameraEventsHandler?,
-    ) : CameraVideoCapturer? {
+    ): CameraVideoCapturer? {
         return if (enumerator.isFrontFacing(deviceName) == frontFacing) {
             enumerator.createCapturer(deviceName, eventsHandler)
         } else null

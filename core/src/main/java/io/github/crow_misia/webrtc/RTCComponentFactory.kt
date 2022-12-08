@@ -33,12 +33,14 @@ class RTCComponentFactory(
                 true,
                 false
             )
+
             option.videoCodec == MediaConstraintsOption.VideoCodec.H264 &&
                     option.videoDownstreamContext != null -> DefaultVideoEncoderFactory(
                 option.videoDownstreamContext,
                 false,
                 false
             )
+
             else -> SoftwareVideoEncoderFactory()
         }
 
@@ -74,7 +76,7 @@ class RTCComponentFactory(
     private fun createJavaAudioDevice(appContext: Context, errorCallback: (ErrorReason, String) -> Unit): AudioDeviceModule {
         WebRtcLogger.d(TAG, "createJavaAudioDevice")
 
-        val audioRecordErrorCallback= object : JavaAudioDeviceModule.AudioRecordErrorCallback {
+        val audioRecordErrorCallback = object : JavaAudioDeviceModule.AudioRecordErrorCallback {
             override fun onWebRtcAudioRecordInitError(errorMessage: String) {
                 WebRtcLogger.e(TAG, "onWebRtcAudioRecordInitError: %s", errorMessage)
                 errorCallback(ErrorReason.AUDIO_RECORD_INIT_ERROR, errorMessage)

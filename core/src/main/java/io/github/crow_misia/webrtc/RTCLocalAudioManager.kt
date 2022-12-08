@@ -18,7 +18,9 @@ sealed interface RTCLocalAudioManager {
 object RTCNoneLocalAudioManager : RTCLocalAudioManager {
     override val track: MediaStreamTrack? = null
     override var enabled: Boolean = false
-        set(_) { field = false }
+        set(_) {
+            field = false
+        }
 
     override fun initTrack(factory: PeerConnectionFactory, option: MediaConstraintsOption) = Unit
     override fun dispose() = Unit
@@ -33,12 +35,14 @@ class RTCLocalAudioManagerImpl(
 
     private var source: AudioSource? = null
 
-    override var track: AudioTrack?  = null
+    override var track: AudioTrack? = null
         private set
 
     override var enabled
-        get() =  track?.enabled() ?: false
-        set(value) { track?.setEnabled(value) }
+        get() = track?.enabled() ?: false
+        set(value) {
+            track?.setEnabled(value)
+        }
 
     override fun initTrack(factory: PeerConnectionFactory, option: MediaConstraintsOption) {
         WebRtcLogger.d(TAG, "initTrack")

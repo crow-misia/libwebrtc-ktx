@@ -11,9 +11,12 @@ sealed interface RTCLocalVideoManager {
     val track: MediaStreamTrack?
     var enabled: Boolean
 
-    fun initTrack(factory: PeerConnectionFactory,
-                  option: MediaConstraintsOption,
-                  appContext: Context)
+    fun initTrack(
+        factory: PeerConnectionFactory,
+        option: MediaConstraintsOption,
+        appContext: Context,
+    )
+
     fun attachTrackToStream(stream: MediaStream)
     fun detachTrackToStream(stream: MediaStream)
     fun switchCamera(switchHandler: CameraVideoCapturer.CameraSwitchHandler)
@@ -47,16 +50,18 @@ class RTCLocalVideoManagerImpl(
     private var source: VideoSource? = null
     private var surfaceTextureHelper: SurfaceTextureHelper? = null
 
-    override var track: VideoTrack?  = null
+    override var track: VideoTrack? = null
         private set
 
     override var enabled: Boolean
         get() = track?.enabled() ?: false
         set(value) { track?.setEnabled(value) }
 
-    override fun initTrack(factory: PeerConnectionFactory,
-                           option: MediaConstraintsOption,
-                           appContext: Context) {
+    override fun initTrack(
+        factory: PeerConnectionFactory,
+        option: MediaConstraintsOption,
+        appContext: Context,
+    ) {
         WebRtcLogger.d(TAG, "initTrack isScreencast=%b", capturer.isScreencast)
 
         surfaceTextureHelper = SurfaceTextureHelper.create("CaptureThread", option.videoUpstreamContext)
@@ -73,12 +78,16 @@ class RTCLocalVideoManagerImpl(
 
     override fun attachTrackToStream(stream: MediaStream) {
         WebRtcLogger.d(TAG, "attachTrackToStream")
-        track?.also { stream.addTrack(it) }
+        track?.also {
+            stream.addTrack(it)
+        }
     }
 
     override fun detachTrackToStream(stream: MediaStream) {
         WebRtcLogger.d(TAG, "detachTrackToStream")
-        track?.also { stream.removeTrack(it) }
+        track?.also {
+            stream.removeTrack(it)
+        }
     }
 
     override fun switchCamera(switchHandler: CameraVideoCapturer.CameraSwitchHandler) {

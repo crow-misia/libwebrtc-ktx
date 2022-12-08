@@ -12,6 +12,7 @@ sealed class BaseSdpObserver<T>(
     override fun onCreateFailure(error: String) {
         continuation.resumeWithException(SdpObserverException(error))
     }
+
     override fun onSetFailure(error: String) {
         continuation.resumeWithException(SdpObserverException(error))
     }
@@ -23,6 +24,7 @@ class CreateSdpObserver(
     override fun onSetSuccess() {
         continuation.resumeWithException(SdpObserverException("illegal operation."))
     }
+
     override fun onCreateSuccess(desc: SessionDescription) {
         continuation.resume(desc)
     }
@@ -34,9 +36,10 @@ class SetSdpObserver(
     override fun onSetSuccess() {
         continuation.resume(Unit)
     }
+
     override fun onCreateSuccess(desc: SessionDescription) {
         continuation.resumeWithException(SdpObserverException("illegal operation."))
     }
 }
 
-class SdpObserverException(error: String): Exception(error)
+class SdpObserverException(error: String) : Exception(error)

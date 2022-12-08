@@ -8,23 +8,23 @@ import org.webrtc.MediaStream
 import org.webrtc.PeerConnection
 
 interface PeerConnectionDefaultObserver : PeerConnection.Observer {
-    override fun onSignalingChange(newState: PeerConnection.SignalingState) { }
+    override fun onSignalingChange(newState: PeerConnection.SignalingState) = Unit
 
-    override fun onAddStream(stream: MediaStream) { }
+    override fun onAddStream(stream: MediaStream) = Unit
 
-    override fun onRemoveStream(stream: MediaStream) { }
+    override fun onRemoveStream(stream: MediaStream) = Unit
 
-    override fun onDataChannel(dataChannel: DataChannel) { }
+    override fun onDataChannel(dataChannel: DataChannel) = Unit
 
-    override fun onRenegotiationNeeded() { }
+    override fun onRenegotiationNeeded() = Unit
 
-    override fun onIceConnectionChange(newState: PeerConnection.IceConnectionState) { }
+    override fun onIceConnectionChange(newState: PeerConnection.IceConnectionState) = Unit
 
-    override fun onIceGatheringChange(newState: PeerConnection.IceGatheringState) { }
+    override fun onIceGatheringChange(newState: PeerConnection.IceGatheringState) = Unit
 
-    override fun onIceCandidate(candidate: IceCandidate) { }
+    override fun onIceCandidate(candidate: IceCandidate) = Unit
 
-    override fun onIceCandidatesRemoved(candidates: Array<out IceCandidate>) { }
+    override fun onIceCandidatesRemoved(candidates: Array<out IceCandidate>) = Unit
 
-    override fun onIceConnectionReceivingChange(receiving: Boolean) { }
+    override fun onIceConnectionReceivingChange(receiving: Boolean) = Unit
 }
