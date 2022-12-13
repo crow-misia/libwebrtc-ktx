@@ -1,63 +1,38 @@
-@file:Suppress("unused")
-
 package io.github.crow_misia.webrtc
 
 import android.content.Context
 import io.github.crow_misia.webrtc.log.WebRtcLogger
 import io.github.crow_misia.webrtc.option.MediaConstraintsOption
-import org.webrtc.*
+import org.webrtc.CameraVideoCapturer
+import org.webrtc.MediaStream
+import org.webrtc.PeerConnectionFactory
+import org.webrtc.SurfaceTextureHelper
+import org.webrtc.VideoCapturer
+import org.webrtc.VideoSource
+import org.webrtc.VideoTrack
 
-sealed interface RTCLocalVideoManager {
-    val track: MediaStreamTrack?
-    var enabled: Boolean
-
-    fun initTrack(
-        factory: PeerConnectionFactory,
-        option: MediaConstraintsOption,
-        appContext: Context,
-    )
-
-    fun attachTrackToStream(stream: MediaStream)
-    fun detachTrackToStream(stream: MediaStream)
-    fun switchCamera(switchHandler: CameraVideoCapturer.CameraSwitchHandler)
-    fun switchCamera(switchHandler: CameraVideoCapturer.CameraSwitchHandler, cameraName: String)
-    fun dispose()
-}
-
-object RTCNoneLocalVideoManager : RTCLocalVideoManager {
-    override val track: MediaStreamTrack? = null
-    override var enabled: Boolean = false
-        set(_) { field = false }
-
-    override fun initTrack(factory: PeerConnectionFactory,
-                           option: MediaConstraintsOption,
-                           appContext: Context) { }
-    override fun attachTrackToStream(stream: MediaStream) { }
-    override fun detachTrackToStream(stream: MediaStream) { }
-    override fun switchCamera(switchHandler: CameraVideoCapturer.CameraSwitchHandler) { }
-    override fun switchCamera(switchHandler: CameraVideoCapturer.CameraSwitchHandler, cameraName: String) { }
-    override fun dispose() { }
-}
-
-class RTCLocalVideoManagerImpl(
+@Suppress("MemberVisibilityCanBePrivate", "unused")
+class RTCLocalVideoManager(
     private val capturer: VideoCapturer,
     private val trackIdGenerator: () -> String,
-) : RTCLocalVideoManager {
+) {
     companion object {
-        private val TAG = RTCLocalVideoManagerImpl::class.simpleName
+        private val TAG = RTCLocalVideoManager::class.simpleName
     }
 
-    private var source: VideoSource? = null
-    private var surfaceTextureHelper: SurfaceTextureHelper? = null
-
-    override var track: VideoTrack? = null
+    var source: VideoSource? = null
+        private set
+    var surfaceTextureHelper: SurfaceTextureHelper? = null
         private set
 
-    override var enabled: Boolean
+    var track: VideoTrack? = null
+        private set
+
+    var enabled: Boolean
         get() = track?.enabled() ?: false
         set(value) { track?.setEnabled(value) }
 
-    override fun initTrack(
+    fun initTrack(
         factory: PeerConnectionFactory,
         option: MediaConstraintsOption,
         appContext: Context,
@@ -76,21 +51,21 @@ class RTCLocalVideoManagerImpl(
         }
     }
 
-    override fun attachTrackToStream(stream: MediaStream) {
+    fun attachTrackToStream(stream: MediaStream) {
         WebRtcLogger.d(TAG, "attachTrackToStream")
         track?.also {
             stream.addTrack(it)
         }
     }
 
-    override fun detachTrackToStream(stream: MediaStream) {
+    fun detachTrackToStream(stream: MediaStream) {
         WebRtcLogger.d(TAG, "detachTrackToStream")
         track?.also {
             stream.removeTrack(it)
         }
     }
 
-    override fun switchCamera(switchHandler: CameraVideoCapturer.CameraSwitchHandler) {
+    fun switchCamera(switchHandler: CameraVideoCapturer.CameraSwitchHandler) {
         WebRtcLogger.d(TAG, "switchCam %s", capturer::class.simpleName)
 
         if (capturer is CameraVideoCapturer) {
@@ -98,7 +73,7 @@ class RTCLocalVideoManagerImpl(
         }
     }
 
-    override fun switchCamera(switchHandler: CameraVideoCapturer.CameraSwitchHandler, cameraName: String) {
+    fun switchCamera(switchHandler: CameraVideoCapturer.CameraSwitchHandler, cameraName: String) {
         WebRtcLogger.d(TAG, "switchCam %s, %s", capturer::class.simpleName, cameraName)
 
         if (capturer is CameraVideoCapturer) {
@@ -106,7 +81,7 @@ class RTCLocalVideoManagerImpl(
         }
     }
 
-    override fun dispose() {
+    fun dispose() {
         WebRtcLogger.d(TAG, "dispose")
 
         WebRtcLogger.d(TAG, "dispose surfaceTextureHelper")

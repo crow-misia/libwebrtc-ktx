@@ -1,50 +1,33 @@
-@file:Suppress("unused")
-
 package io.github.crow_misia.webrtc
 
 import io.github.crow_misia.webrtc.log.WebRtcLogger
 import io.github.crow_misia.webrtc.option.MediaConstraintsOption
-import org.webrtc.*
-import java.util.*
+import org.webrtc.AudioSource
+import org.webrtc.AudioTrack
+import org.webrtc.MediaConstraints
+import org.webrtc.PeerConnectionFactory
 
-sealed interface RTCLocalAudioManager {
-    val track: MediaStreamTrack?
-    var enabled: Boolean
-
-    fun initTrack(factory: PeerConnectionFactory, option: MediaConstraintsOption)
-    fun dispose()
-}
-
-object RTCNoneLocalAudioManager : RTCLocalAudioManager {
-    override val track: MediaStreamTrack? = null
-    override var enabled: Boolean = false
-        set(_) {
-            field = false
-        }
-
-    override fun initTrack(factory: PeerConnectionFactory, option: MediaConstraintsOption) = Unit
-    override fun dispose() = Unit
-}
-
-class RTCLocalAudioManagerImpl(
+@Suppress("MemberVisibilityCanBePrivate", "unused")
+open class RTCLocalAudioManager(
     private val trackIdGenerator: () -> String,
-) : RTCLocalAudioManager {
+) {
     companion object {
-        private val TAG = RTCLocalAudioManagerImpl::class.simpleName
+        private val TAG = RTCLocalAudioManager::class.simpleName
     }
 
-    private var source: AudioSource? = null
-
-    override var track: AudioTrack? = null
+    var source: AudioSource? = null
         private set
 
-    override var enabled
+    var track: AudioTrack? = null
+        private set
+
+    var enabled
         get() = track?.enabled() ?: false
         set(value) {
             track?.setEnabled(value)
         }
 
-    override fun initTrack(factory: PeerConnectionFactory, option: MediaConstraintsOption) {
+    fun initTrack(factory: PeerConnectionFactory, option: MediaConstraintsOption) {
         WebRtcLogger.d(TAG, "initTrack")
 
         val constraints = createSourceConstraints(option)
@@ -57,7 +40,7 @@ class RTCLocalAudioManagerImpl(
         }
     }
 
-    private fun createSourceConstraints(option: MediaConstraintsOption): MediaConstraints {
+    open fun createSourceConstraints(option: MediaConstraintsOption): MediaConstraints {
         return MediaConstraints().apply {
             // echo cancellation
             addMandatory(MediaConstraintsOption.ECHO_CANCELLATION_CONSTRAINT, option.audioProcessingEchoCancellation)
@@ -75,7 +58,7 @@ class RTCLocalAudioManagerImpl(
             addMandatory(MediaConstraintsOption.NOISE_SUPPRESSION_CONSTRAINT, option.audioProcessingNoiseSuppression)
             // goog noise suppression
             addMandatory(MediaConstraintsOption.GOOG_NOISE_SUPPRESSION_CONSTRAINT, option.audioProcessingNoiseSuppression)
-            // experimental noise suppression
+            // goog experimental noise suppression
             addMandatory(MediaConstraintsOption.GOOG_EXPERIMENTAL_NOISE_SUPPRESSION_CONSTRAINT, option.audioProcessingExperimentalNS)
             // goog typing noise detection
             addMandatory(MediaConstraintsOption.GOOG_TYPING_NOISE_DETECTION_CONSTRAINT, option.audioProcessingTypingNoiseDetection)
@@ -84,7 +67,7 @@ class RTCLocalAudioManagerImpl(
         }
     }
 
-    override fun dispose() {
+    fun dispose() {
         WebRtcLogger.d(TAG, "dispose")
 
         WebRtcLogger.d(TAG, "dispose track")
@@ -99,7 +82,8 @@ class RTCLocalAudioManagerImpl(
         source = null
     }
 
-    private fun MediaConstraints.addMandatory(name: String, value: Boolean) {
+    @Suppress("MemberVisibilityCanBePrivate")
+    protected fun MediaConstraints.addMandatory(name: String, value: Boolean) {
         val valueString = if (value) "true" else "false"
         mandatory.add(MediaConstraints.KeyValuePair(name, valueString))
     }

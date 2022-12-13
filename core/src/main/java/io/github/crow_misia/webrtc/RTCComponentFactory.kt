@@ -126,20 +126,20 @@ class RTCComponentFactory(
     }
 
     @JvmOverloads
-    fun createVideoManager(trackIdGenerator: () -> String = { UUID.randomUUID().toString() }): RTCLocalVideoManager {
+    fun createVideoManager(trackIdGenerator: () -> String = { UUID.randomUUID().toString() }): RTCLocalVideoManager? {
         val videoManager = option.videoCapturer?.let {
-            RTCLocalVideoManagerImpl(it, trackIdGenerator)
-        } ?: RTCNoneLocalVideoManager
+            RTCLocalVideoManager(it, trackIdGenerator)
+        }
         WebRtcLogger.d(TAG, "videoManager created: %s", videoManager)
         return videoManager
     }
 
     @JvmOverloads
-    fun createAudioManager(trackIdGenerator: () -> String = { UUID.randomUUID().toString() }): RTCLocalAudioManager {
+    fun createAudioManager(trackIdGenerator: () -> String = { UUID.randomUUID().toString() }): RTCLocalAudioManager? {
         return if (option.audioUpstreamEnabled) {
-            RTCLocalAudioManagerImpl(trackIdGenerator)
+            RTCLocalAudioManager(trackIdGenerator)
         } else {
-            RTCNoneLocalAudioManager
+            null
         }
     }
 
