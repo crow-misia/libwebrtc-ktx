@@ -16,7 +16,7 @@ dokka-gradle-plugin = "org.jetbrains.dokka:dokka-gradle-plugin:1.7.20"
 
 org-jacoco-ant = "org.jacoco:org.jacoco.ant:0.8.8"
 
-libwebrtc-bin = "com.github.crow-misia:libwebrtc-bin:109.5414.1.0"
+libwebrtc-bin = "com.github.crow-misia:libwebrtc-bin:109.5414.2.0"
 
 dokka-analysis = "org.jetbrains.dokka:dokka-analysis:1.7.20"
 
