@@ -30,7 +30,7 @@ version = Maven.version
 
 android {
     namespace = "io.github.crow_misia.webrtc"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 21
