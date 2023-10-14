@@ -8,6 +8,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.webrtc.MediaConstraints
 import org.webrtc.PeerConnection
 import org.webrtc.RTCStatsReport
+import org.webrtc.RtpReceiver
+import org.webrtc.RtpSender
 import org.webrtc.SessionDescription
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -47,9 +49,20 @@ suspend inline fun PeerConnection.createAnswer(constraints: MediaConstraints): S
     }
 }
 
-@ExperimentalCoroutinesApi
 suspend inline fun PeerConnection.getStats(): RTCStatsReport {
     return suspendCoroutine {
         getStats { report -> it.resume(report) }
+    }
+}
+
+suspend inline fun PeerConnection.getStats(sender: RtpSender): RTCStatsReport {
+    return suspendCoroutine {
+        getStats(sender) { report -> it.resume(report) }
+    }
+}
+
+suspend inline fun PeerConnection.getStats(receiver: RtpReceiver): RTCStatsReport {
+    return suspendCoroutine {
+        getStats(receiver) { report -> it.resume(report) }
     }
 }
