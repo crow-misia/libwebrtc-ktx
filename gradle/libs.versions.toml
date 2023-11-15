@@ -2,11 +2,11 @@
 
 [versions]
 
-dokka = "1.9.0"
+dokka = "1.9.10"
 
 [libraries]
 
-libwebrtc-bin = "com.github.crow-misia:libwebrtc-bin:119.6045.1.0"
+libwebrtc-bin = "com.github.crow-misia:libwebrtc-bin:120.6099.1.1"
 
 dokka-gradle-plugin = { group = "org.jetbrains.dokka", name = "dokka-gradle-plugin", version.ref = "dokka" }
 
