@@ -1,7 +1,7 @@
 # libwebrtc kotlin extensions + utilities
 
 [![Android CI](https://github.com/crow-misia/libwebrtc-ktx/actions/workflows/android.yml/badge.svg?branch=main)](https://github.com/crow-misia/libwebrtc-ktx/actions/workflows/android.yml)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.crow-misia.libwebrtc/libwebrtc-ktx.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.crow-misia.libwebrtc%22%20AND%20a:%22libwebrtc-ktx%22)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.crow-misia.libwebrtc/libwebrtc-ktx.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:io.github.crow-misia.libwebrtc%20AND%20a:libwebrtc-ktx)
 [![License](https://img.shields.io/github/license/crow-misia/libwebrtc-ktx)](LICENSE)
 
 Useful classes for developing apps using libwebrtc.
@@ -12,7 +12,7 @@ Useful classes for developing apps using libwebrtc.
 
 Add dependencies (you can also add other modules that you need):
 
-`${latest.version}` is [![Download](https://img.shields.io/maven-central/v/io.github.crow-misia.libwebrtc/libwebrtc-ktx.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.crow-misia.libwebrtc%22%20AND%20a:%22libwebrtc-ktx%22)
+`${latest.version}` is [![Download](https://img.shields.io/maven-central/v/io.github.crow-misia.libwebrtc/libwebrtc-ktx.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:io.github.crow-misia.libwebrtc%20AND%20a:libwebrtc-ktx)
 
 ```groovy
 dependencies {
