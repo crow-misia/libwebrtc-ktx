@@ -17,7 +17,10 @@ class RTCComponentFactory(
         private val TAG = RTCComponentFactory::class.simpleName
     }
 
-    fun createPeerConnectionFactory(context: Context, errorCallback: (errorReason: ErrorReason, errorMessage: String) -> Unit): PeerConnectionFactory {
+    fun createPeerConnectionFactory(
+        context: Context,
+        errorCallback: (errorReason: ErrorReason, errorMessage: String) -> Unit,
+    ): PeerConnectionFactory {
         WebRtcLogger.d(TAG, "createPeerConnectionFactory")
 
         val options = PeerConnectionFactory.Options()
@@ -73,7 +76,10 @@ class RTCComponentFactory(
             }
     }
 
-    private fun createJavaAudioDevice(appContext: Context, errorCallback: (ErrorReason, String) -> Unit): AudioDeviceModule {
+    private fun createJavaAudioDevice(
+        appContext: Context,
+        errorCallback: (ErrorReason, String) -> Unit,
+    ): AudioDeviceModule {
         WebRtcLogger.d(TAG, "createJavaAudioDevice")
 
         val audioRecordErrorCallback = object : JavaAudioDeviceModule.AudioRecordErrorCallback {
@@ -83,8 +89,15 @@ class RTCComponentFactory(
             }
 
             override fun onWebRtcAudioRecordStartError(
-                errorCode: JavaAudioDeviceModule.AudioRecordStartErrorCode, errorMessage: String) {
-                WebRtcLogger.e(TAG, "onWebRtcAudioRecordStartError: %s. %s", errorCode, errorMessage)
+                errorCode: JavaAudioDeviceModule.AudioRecordStartErrorCode,
+                errorMessage: String,
+            ) {
+                WebRtcLogger.e(
+                    TAG,
+                    "onWebRtcAudioRecordStartError: %s. %s",
+                    errorCode,
+                    errorMessage,
+                )
                 errorCallback(ErrorReason.AUDIO_RECORD_START_ERROR, errorMessage)
             }
 
@@ -100,7 +113,9 @@ class RTCComponentFactory(
             }
 
             override fun onWebRtcAudioTrackStartError(
-                errorCode: JavaAudioDeviceModule.AudioTrackStartErrorCode, errorMessage: String) {
+                errorCode: JavaAudioDeviceModule.AudioTrackStartErrorCode,
+                errorMessage: String,
+            ) {
                 WebRtcLogger.e(TAG, "onWebRtcAudioTrackStartError: %s. %s", errorCode, errorMessage)
                 errorCallback(ErrorReason.AUDIO_TRACK_START_ERROR, errorMessage)
             }
@@ -126,7 +141,9 @@ class RTCComponentFactory(
     }
 
     @JvmOverloads
-    fun createVideoManager(trackIdGenerator: () -> String = { UUID.randomUUID().toString() }): RTCLocalVideoManager? {
+    fun createVideoManager(
+        trackIdGenerator: () -> String = { UUID.randomUUID().toString() },
+    ): RTCLocalVideoManager? {
         val videoManager = option.videoCapturer?.let {
             RTCLocalVideoManager(it, trackIdGenerator)
         }
@@ -135,12 +152,14 @@ class RTCComponentFactory(
     }
 
     @JvmOverloads
-    fun createAudioManager(trackIdGenerator: () -> String = { UUID.randomUUID().toString() }): RTCLocalAudioManager? {
+    fun createAudioManager(
+        trackIdGenerator: () -> String = {
+            UUID.randomUUID().toString()
+        },
+    ): RTCLocalAudioManager? {
         return if (option.audioUpstreamEnabled) {
             RTCLocalAudioManager(trackIdGenerator)
-        } else {
-            null
-        }
+        } else null
     }
 
     enum class ErrorReason {

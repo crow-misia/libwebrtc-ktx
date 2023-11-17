@@ -24,13 +24,22 @@ object CameraCapturerFactory {
             createCapturer(Camera2Enumerator(context), preferenceFrontCamera, eventsHandler)
         } else null
 
-        capturer = capturer ?: createCapturer(Camera1Enumerator(true), preferenceFrontCamera, eventsHandler)
+        capturer = capturer ?: createCapturer(
+            Camera1Enumerator(true),
+            preferenceFrontCamera,
+            eventsHandler,
+        )
         capturer ?: return null
 
         return when (capturer.isScreencast) {
             fixedResolution -> capturer
             else -> {
-                WebRtcLogger.d(TAG, "Wrap capturer: original.isScreencast=%b, fixedResolution=%b", capturer.isScreencast, fixedResolution)
+                WebRtcLogger.d(
+                    TAG,
+                    "Wrap capturer: original.isScreencast=%b, fixedResolution=%b",
+                    capturer.isScreencast,
+                    fixedResolution,
+                )
                 CameraVideoCapturerWrapper(capturer, fixedResolution)
             }
         }
@@ -42,10 +51,24 @@ object CameraCapturerFactory {
         eventsHandler: CameraVideoCapturer.CameraEventsHandler?,
     ): CameraVideoCapturer? {
         val capturer = enumerator.deviceNames
-            .firstNotNullOfOrNull { deviceName -> findDeviceCamera(enumerator, deviceName, preferenceFrontCamera, eventsHandler) }
+            .firstNotNullOfOrNull { deviceName ->
+                findDeviceCamera(
+                    enumerator,
+                    deviceName,
+                    preferenceFrontCamera,
+                    eventsHandler,
+                )
+            }
 
         return capturer ?: enumerator.deviceNames
-            .firstNotNullOfOrNull { deviceName -> findDeviceCamera(enumerator, deviceName, preferenceFrontCamera, eventsHandler) }
+            .firstNotNullOfOrNull { deviceName ->
+                findDeviceCamera(
+                    enumerator,
+                    deviceName,
+                    preferenceFrontCamera,
+                    eventsHandler,
+                )
+            }
     }
 
     private fun findDeviceCamera(

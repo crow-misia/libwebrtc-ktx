@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>MaxLineLength:RTCComponentFactory.kt$RTCComponentFactory$.</ID>
+    <ID>MaxLineLength:RTCLocalAudioManager.kt$RTCLocalAudioManager$addMandatory(MediaConstraintsOption.GOOG_AUTO_GAIN_CONTROL_CONSTRAINT, option.audioProcessingAutoGainControl)</ID>
+    <ID>MaxLineLength:RTCLocalAudioManager.kt$RTCLocalAudioManager$addMandatory(MediaConstraintsOption.GOOG_ECHO_CANCELLATION_CONSTRAINT, option.audioProcessingEchoCancellation)</ID>
+    <ID>MaxLineLength:RTCLocalAudioManager.kt$RTCLocalAudioManager$addMandatory(MediaConstraintsOption.GOOG_EXPERIMENTAL_AUTO_GAIN_CONTROL_CONSTRAINT, option.audioProcessingExperimentalAGC)</ID>
+    <ID>MaxLineLength:RTCLocalAudioManager.kt$RTCLocalAudioManager$addMandatory(MediaConstraintsOption.GOOG_EXPERIMENTAL_NOISE_SUPPRESSION_CONSTRAINT, option.audioProcessingExperimentalNS)</ID>
+    <ID>MaxLineLength:RTCLocalAudioManager.kt$RTCLocalAudioManager$addMandatory(MediaConstraintsOption.GOOG_NOISE_SUPPRESSION_CONSTRAINT, option.audioProcessingNoiseSuppression)</ID>
+    <ID>MaxLineLength:RTCLocalAudioManager.kt$RTCLocalAudioManager$addMandatory(MediaConstraintsOption.GOOG_TYPING_NOISE_DETECTION_CONSTRAINT, option.audioProcessingTypingNoiseDetection)</ID>
+  </CurrentIssues>
+</SmellBaseline>

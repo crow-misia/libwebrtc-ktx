@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     id("com.android.library")
+    id("io.gitlab.arturbosch.detekt")
     id("org.jetbrains.dokka")
     id("maven-publish")
     id("signing")
@@ -40,6 +41,13 @@ android {
     lint {
         textReport = true
         checkDependencies = true
+        baseline = file("lint-baseline.xml")
+    }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
     }
 
     compileOptions {
@@ -78,7 +86,7 @@ val customDokkaTask by tasks.creating(DokkaTask::class) {
         plugins(libs.javadoc.plugin)
     }
     inputs.dir("src/main/java")
-    outputDirectory.set(buildDir.resolve("javadoc"))
+    outputDirectory.set(layout.buildDirectory.dir("javadoc"))
 }
 
 val javadocJar by tasks.creating(Jar::class) {
@@ -156,6 +164,38 @@ afterEvaluate {
     signing {
         useGpgCmd()
         sign(publishing.publications.getByName("maven"))
+    }
+}
+
+detekt {
+    parallel = true
+    buildUponDefaultConfig = true
+    allRules = false
+    autoCorrect = true
+    config.setFrom(files("$rootDir/config/detekt.yml"))
+}
+
+tasks {
+    withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+        // Target version of the generated JVM bytecode. It is used for type resolution.
+        jvmTarget = "11"
+
+        reports {
+            html.required.set(true)
+            xml.required.set(true)
+            txt.required.set(true)
+            sarif.required.set(true)
+        }
+    }
+    withType<io.gitlab.arturbosch.detekt.DetektCreateBaselineTask>().configureEach {
+        jvmTarget = "11"
+    }
+    withType<Test> {
+        useJUnitPlatform()
+        testLogging {
+            showStandardStreams = true
+            events("passed", "skipped", "failed")
+        }
     }
 }
 
