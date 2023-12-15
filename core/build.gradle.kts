@@ -1,15 +1,14 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
-import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
-    id("com.android.library")
-    id("io.gitlab.arturbosch.detekt")
-    id("org.jetbrains.dokka")
-    id("maven-publish")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.kotlin.android)
     id("signing")
-    kotlin("android")
+    id("maven-publish")
 }
 
 object Maven {
@@ -48,6 +47,9 @@ android {
         unitTests {
             isIncludeAndroidResources = true
         }
+        unitTests.all {
+            it.useJUnitPlatform()
+        }
     }
 
     compileOptions {
@@ -62,7 +64,7 @@ android {
     }
 }
 
-tasks.withType<KotlinJvmCompile>().all {
+kotlin {
     compilerOptions {
         freeCompilerArgs.addAll("-Xjsr305=strict")
         javaParameters.set(true)
@@ -73,8 +75,9 @@ tasks.withType<KotlinJvmCompile>().all {
 }
 
 dependencies {
-    implementation(Kotlin.stdlib)
-    implementation(KotlinX.coroutines.core)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlinx.coroutines.core)
+
     compileOnly(libs.libwebrtc.bin)
 }
 
@@ -83,7 +86,7 @@ val customDokkaTask by tasks.creating(DokkaTask::class) {
         noAndroidSdkLink.set(false)
     }
     dependencies {
-        plugins(libs.javadoc.plugin)
+        plugins(libs.dokka.javadoc.plugin)
     }
     inputs.dir("src/main/java")
     outputDirectory.set(layout.buildDirectory.dir("javadoc"))
