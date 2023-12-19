@@ -8,6 +8,9 @@ on:
     - 'LICENSE'
   pull_request:
     branches: [ main ]
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
 
 jobs:
   build:
