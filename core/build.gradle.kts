@@ -49,6 +49,10 @@ android {
         }
         unitTests.all {
             it.useJUnitPlatform()
+            it.testLogging {
+                showStandardStreams = true
+                events("passed", "skipped", "failed")
+            }
         }
     }
 
@@ -178,6 +182,7 @@ detekt {
     config.setFrom(files("$rootDir/config/detekt.yml"))
 }
 
+
 tasks {
     withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
         // Target version of the generated JVM bytecode. It is used for type resolution.
@@ -192,22 +197,5 @@ tasks {
     }
     withType<io.gitlab.arturbosch.detekt.DetektCreateBaselineTask>().configureEach {
         jvmTarget = "11"
-    }
-    withType<Test> {
-        useJUnitPlatform()
-        testLogging {
-            showStandardStreams = true
-            events("passed", "skipped", "failed")
-        }
-    }
-}
-
-tasks {
-    withType<Test> {
-        useJUnitPlatform()
-        testLogging {
-            showStandardStreams = true
-            events("passed", "skipped", "failed")
-        }
     }
 }
