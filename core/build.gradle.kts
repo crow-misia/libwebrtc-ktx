@@ -61,6 +61,26 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
+    packaging {
+        resources {
+            excludes.add("/META-INF/{AL2.0,LGPL2.1}")
+            excludes.add("/META-INF/LICENSE*")
+        }
+    }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+        unitTests.all {
+            it.useJUnitPlatform()
+            it.testLogging {
+                showStandardStreams = true
+                events("passed", "skipped", "failed")
+            }
+        }
+    }
+
     publishing {
         singleVariant("release") {
             withSourcesJar()
@@ -79,10 +99,25 @@ kotlin {
 }
 
 dependencies {
-    implementation(libs.kotlin.stdlib)
-    implementation(libs.kotlinx.coroutines.core)
+    compileOnly(platform(libs.kotlin.bom))
+    compileOnly(libs.kotlin.stdlib)
+    compileOnly(platform(libs.kotlinx.coroutines.bom))
+    compileOnly(libs.kotlinx.coroutines.core)
 
     compileOnly(libs.libwebrtc.bin)
+
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.kotest.runner.junit5)
+    testImplementation(libs.kotest.assertions.core)
+    testImplementation(libs.kotest.property)
+    testImplementation(libs.mockk)
+
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.androidx.test.ext.junit.ktx)
+    androidTestImplementation(libs.androidx.test.ext.truth)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.mockk.android)
+    androidTestImplementation(libs.truth)
 }
 
 val customDokkaTask by tasks.creating(DokkaTask::class) {

@@ -20,14 +20,50 @@ kotlin = "1.9.22"
 
 kotlinx-coroutines = "1.7.3"
 
+androidx-test-ext-junit = "1.2.0-alpha03"
+
+androidx-test-ext-truth = "1.6.0-alpha03"
+
+androidx-test-espresso = "3.6.0-alpha03"
+
+kotest = "5.8.0"
+
+mockk = "1.13.9"
+
+truth = "1.4.0"
+
 dokka = "1.9.10"
 
 [libraries]
 
-kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin" }
 
-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib" }
+
+kotlinx-coroutines-bom = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-bom", version.ref = "kotlinx-coroutines" }
+
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core" }
+
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test" }
 
 dokka-javadoc-plugin = { group = "org.jetbrains.dokka", name = "javadoc-plugin", version.ref = "dokka" }
 
 libwebrtc-bin = { group = "com.github.crow-misia", name = "libwebrtc-bin", version = "121.6167.5.0" }
+
+androidx-test-ext-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidx-test-ext-junit" }
+
+androidx-test-ext-truth = { group = "androidx.test.ext", name = "truth", version.ref = "androidx-test-ext-truth" }
+
+androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidx-test-espresso" }
+
+kotest-runner-junit5 = { group = "io.kotest", name = "kotest-runner-junit5", version.ref = "kotest" }
+
+kotest-assertions-core = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
+
+kotest-property = { group = "io.kotest", name = "kotest-property", version.ref = "kotest" }
+
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+
+mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
+
+truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
