@@ -18,7 +18,7 @@ android-gradle-plugin = "8.2.2"
 
 kotlin = "1.9.22"
 
-kotlinx-coroutines = "1.7.3"
+kotlinx-coroutines = "1.8.0"
 
 androidx-test-ext-junit = "1.2.0-alpha03"
 
