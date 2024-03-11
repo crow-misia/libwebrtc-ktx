@@ -30,7 +30,7 @@ androidx-test-runner = "1.6.0-alpha06"
 
 androidx-test-rules = "1.6.0-alpha03"
 
-kotest = "5.8.0"
+kotest = "5.8.1"
 
 mockk = "1.13.10"
 
