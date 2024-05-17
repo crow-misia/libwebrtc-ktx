@@ -20,15 +20,15 @@ kotlin = "1.9.24"
 
 kotlinx-coroutines = "1.8.1"
 
-androidx-test-ext-junit = "1.2.0-alpha04"
+androidx-test-ext-junit = "1.2.0-beta01"
 
-androidx-test-ext-truth = "1.6.0-alpha04"
+androidx-test-ext-truth = "1.6.0-beta01"
 
-androidx-test-espresso = "3.6.0-alpha04"
+androidx-test-espresso = "3.6.0-beta01"
 
-androidx-test-runner = "1.6.0-alpha07"
+androidx-test-runner = "1.6.0-beta01"
 
-androidx-test-rules = "1.6.0-alpha04"
+androidx-test-rules = "1.6.0-beta01"
 
 kotest = "5.9.0"
 
@@ -52,7 +52,7 @@ kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 
 dokka-javadoc-plugin = { group = "org.jetbrains.dokka", name = "javadoc-plugin", version.ref = "dokka" }
 
-libwebrtc-bin = { group = "com.github.crow-misia", name = "libwebrtc-bin", version = "125.6422.2.0" }
+libwebrtc-bin = { group = "com.github.crow-misia", name = "libwebrtc-bin", version = "126.6478.0.0" }
 
 androidx-test-ext-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidx-test-ext-junit" }
 
