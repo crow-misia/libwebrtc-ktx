@@ -20,7 +20,7 @@ object Maven {
     const val gitUrl = "https://github.com/crow-misia/libwebrtc-ktx.git"
     const val githubRepo = "crow-misia/libwebrtc-ktx"
     const val licenseName = "The Apache Software License, Version 2.0"
-    const val licenseUrl = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+    const val licenseUrl = "https://www.apache.org/licenses/LICENSE-2.0.txt"
     const val licenseDist = "repo"
 }
 
