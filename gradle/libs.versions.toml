@@ -14,7 +14,7 @@ dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 
 [versions]
 
-android-gradle-plugin = "8.7.2"
+android-gradle-plugin = "8.7.3"
 
 kotlin = "2.1.0"
 
@@ -52,7 +52,7 @@ kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 
 dokka-javadoc-plugin = { group = "org.jetbrains.dokka", name = "javadoc-plugin", version.ref = "dokka" }
 
-libwebrtc-bin = { group = "com.github.crow-misia", name = "libwebrtc-bin", version = "132.6834.2.0" }
+libwebrtc-bin = { group = "com.github.crow-misia", name = "libwebrtc-bin", version = "132.6834.3.0" }
 
 androidx-test-ext-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidx-test-ext-junit" }
 
