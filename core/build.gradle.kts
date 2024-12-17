@@ -3,8 +3,9 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.dokka)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.dokka.javadoc)
     alias(libs.plugins.kotlin.android)
     id("signing")
     id("maven-publish")
@@ -89,8 +90,8 @@ android {
 
 kotlin {
     compilerOptions {
-        javaParameters.set(true)
-        jvmTarget.set(JvmTarget.JVM_1_8)
+        javaParameters = true
+        jvmTarget = JvmTarget.JVM_1_8
     }
 }
 
@@ -118,93 +119,80 @@ dependencies {
     androidTestImplementation(libs.truth)
 }
 
-val customDokkaTask by tasks.creating(DokkaTask::class) {
-    dokkaSourceSets.getByName("main") {
-        noAndroidSdkLink.set(false)
-    }
-    dependencies {
-        plugins(libs.dokka.javadoc.plugin)
-    }
-    inputs.dir("src/main/java")
-    outputDirectory.set(layout.buildDirectory.dir("javadoc"))
+val dokkaJavadocJar by tasks.registering(Jar::class) {
+    description = "A Javadoc JAR containing Dokka Javadoc"
+    from(tasks.dokkaGeneratePublicationJavadoc.flatMap { it.outputDirectory })
+    archiveClassifier = "javadoc"
 }
 
-val javadocJar by tasks.creating(Jar::class) {
-    dependsOn(customDokkaTask)
-    group = JavaBasePlugin.DOCUMENTATION_GROUP
-    description = "Assembles JavaDoc JAR"
-    archiveClassifier.set("javadoc")
-    from(customDokkaTask.outputDirectory)
-}
+publishing {
+    publications {
+        register<MavenPublication>("maven") {
+            afterEvaluate {
+                from(components.named("release").get())
+            }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("maven") {
-                from(components["release"])
+            groupId = Maven.groupId
+            artifactId = Maven.artifactId
 
-                groupId = Maven.groupId
-                artifactId = Maven.artifactId
+            println("""
+                |Creating maven publication
+                |    Group: $groupId
+                |    Artifact: $artifactId
+                |    Version: $version
+            """.trimMargin())
 
-                println("""
-                    |Creating maven publication
-                    |    Group: $groupId
-                    |    Artifact: $artifactId
-                    |    Version: $version
-                """.trimMargin())
+            artifact(dokkaJavadocJar)
 
-                artifact(javadocJar)
+            pom {
+                name = Maven.artifactId
+                description = Maven.desc
+                url = Maven.siteUrl
 
-                pom {
-                    name.set(Maven.artifactId)
-                    description.set(Maven.desc)
-                    url.set(Maven.siteUrl)
+                scm {
+                    val scmUrl = "scm:git:${Maven.gitUrl}"
+                    connection = scmUrl
+                    developerConnection = scmUrl
+                    url = Maven.gitUrl
+                    tag = "HEAD"
+                }
 
-                    scm {
-                        val scmUrl = "scm:git:${Maven.gitUrl}"
-                        connection.set(scmUrl)
-                        developerConnection.set(scmUrl)
-                        url.set(Maven.gitUrl)
-                        tag.set("HEAD")
+                developers {
+                    developer {
+                        id = "crow-misia"
+                        name = "Zenichi Amano"
+                        email = "crow.misia@gmail.com"
+                        roles = listOf("Project-Administrator", "Developer")
+                        timezone = "+9"
                     }
+                }
 
-                    developers {
-                        developer {
-                            id.set("crow-misia")
-                            name.set("Zenichi Amano")
-                            email.set("crow.misia@gmail.com")
-                            roles.set(listOf("Project-Administrator", "Developer"))
-                            timezone.set("+9")
-                        }
-                    }
-
-                    licenses {
-                        license {
-                            name.set(Maven.licenseName)
-                            url.set(Maven.licenseUrl)
-                            distribution.set(Maven.licenseDist)
-                        }
+                licenses {
+                    license {
+                        name = Maven.licenseName
+                        url = Maven.licenseUrl
+                        distribution = Maven.licenseDist
                     }
                 }
             }
         }
-        repositories {
-            maven {
-                val releasesRepoUrl = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2")
-                val snapshotsRepoUrl = uri("https://oss.sonatype.org/content/repositories/snapshots")
-                url = if (Maven.version.endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
-                credentials {
-                    username = providers.gradleProperty("sona.user").orElse(providers.environmentVariable("SONA_USER")).orNull
-                    password = providers.gradleProperty("sona.password").orElse(providers.environmentVariable("SONA_PASSWORD")).orNull
-                }
+    }
+    repositories {
+        maven {
+            val releasesRepoUrl = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2")
+            val snapshotsRepoUrl = uri("https://oss.sonatype.org/content/repositories/snapshots")
+            url = if (Maven.version.endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
+            credentials {
+                username = providers.gradleProperty("sona.user").orElse(providers.environmentVariable("SONA_USER")).orNull
+                password = providers.gradleProperty("sona.password").orElse(providers.environmentVariable("SONA_PASSWORD")).orNull
             }
         }
     }
+}
 
-    signing {
-        useGpgCmd()
-        sign(publishing.publications.getByName("maven"))
-    }
+signing {
+    useGpgCmd()
+    sign(publishing.publications)
 }
 
 detekt {
