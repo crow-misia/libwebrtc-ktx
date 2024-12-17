@@ -53,3 +53,6 @@ node_modules/
 !.idea/codeStyleSettings.xml
 !.idea/findbugs-idea.xml
 core/.cxx/
+
+# Kotlin
+.kotlin
