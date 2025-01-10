@@ -42,7 +42,7 @@ kotest = "5.9.1"
 
 maven-publish = "0.30.0"
 
-mockk = "1.13.14"
+mockk = "1.13.16"
 
 truth = "1.4.4"
 
