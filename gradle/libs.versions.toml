@@ -18,7 +18,7 @@ maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publ
 
 [versions]
 
-android-gradle-plugin = "8.8.1"
+android-gradle-plugin = "8.8.2"
 
 kotlin = "2.1.10"
 
