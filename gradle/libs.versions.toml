@@ -74,7 +74,7 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test" }
 
-libwebrtc-bin = { group = "com.github.crow-misia", name = "libwebrtc-bin", version = "134.6998.0.0" }
+libwebrtc-bin = { group = "com.github.crow-misia", name = "libwebrtc-bin", version = "134.6998.1.0" }
 
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 
