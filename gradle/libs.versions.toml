@@ -40,7 +40,7 @@ dokka = "2.0.0"
 
 kotest = "5.9.1"
 
-maven-publish = "0.30.0"
+maven-publish = "0.31.0"
 
 mockk = "1.13.17"
 
