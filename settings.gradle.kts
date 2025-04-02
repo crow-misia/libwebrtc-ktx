@@ -7,7 +7,7 @@ pluginManagement {
 }
 
 plugins {
-    id("de.fayard.refreshVersions") version "0.60.5"
+    id("jp.co.gahojin.refreshVersions") version "0.1.4"
 }
 
 dependencyResolutionManagement {
@@ -17,6 +17,10 @@ dependencyResolutionManagement {
         mavenCentral()
         maven(url = "https://jitpack.io")
     }
+}
+
+refreshVersions {
+    sortSection = true
 }
 
 rootProject.name = "libwebrtc-ktx"
