@@ -26,7 +26,7 @@ kotest = "5.9.1"
 
 maven-publish = "0.31.0"
 
-mockk = "1.13.17"
+mockk = "1.14.0"
 
 truth = "1.4.4"
 
@@ -58,7 +58,7 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test" }
 
-libwebrtc-bin = { group = "com.github.crow-misia", name = "libwebrtc-bin", version = "135.7049.2.0" }
+libwebrtc-bin = { group = "com.github.crow-misia", name = "libwebrtc-bin", version = "136.7103.0.0" }
 
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 
