@@ -7,18 +7,18 @@ settings:
 importers:
 
   .:
-    devDependencies:
+    dependencies:
       '@commitlint/cli':
-        specifier: ^19.8.0
-        version: 19.8.0(@types/node@22.13.0)(typescript@5.4.5)
+        specifier: 19.8.0
+        version: 19.8.0(@types/node@22.15.3)(typescript@5.4.5)
       '@commitlint/config-conventional':
-        specifier: ^19.8.0
+        specifier: 19.8.0
         version: 19.8.0
-      husky:
-        specifier: ^9.1.7
-        version: 9.1.7
+      lefthook:
+        specifier: 1.11.11
+        version: 1.11.11
       npm-check-updates:
-        specifier: ^18.0.1
+        specifier: 18.0.1
         version: 18.0.1
 
 packages:
@@ -103,8 +103,8 @@ packages:
   '@types/conventional-commits-parser@5.0.1':
     resolution: {integrity: sha512-7uz5EHdzz2TqoMfV7ee61Egf5y6NkcO4FB/1iCCQnbeiI1F3xzv3vK5dBCXUCLQgGYS+mUeigK1iKQzvED+QnQ==}
 
-  '@types/node@22.13.0':
-    resolution: {integrity: sha512-ClIbNe36lawluuvq3+YYhnIN2CELi+6q8NpnM7PYp4hBn/TatfboPgVSm2rwKRfnV2M+Ty9GWDFI64KEe+kysA==}
+  '@types/node@22.15.3':
+    resolution: {integrity: sha512-lX7HFZeHf4QG/J7tBZqrCAXwz9J5RD56Y6MpP0eJkka8p+K0RY/yBTW7CYFJ4VGCclxqOLKmiGP5juQc6MKgcw==}
 
   JSONStream@1.3.5:
     resolution: {integrity: sha512-E+iruNOY8VV9s4JEbe1aNEm6MiszPRr/UfcHMz0TQh1BXSxHK+ASV1R6W4HpjBhSeS+54PIsAMCBmwD06LLsqQ==}
@@ -224,11 +224,6 @@ packages:
     resolution: {integrity: sha512-wHTUcDUoZ1H5/0iVqEudYW4/kAlN5cZ3j/bXn0Dpbizl9iaUVeWSHqiOjsgk6OW2bkLclbBjzewBz6weQ1zA2Q==}
     engines: {node: '>=18'}
 
-  husky@9.1.7:
-    resolution: {integrity: sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   import-fresh@3.3.1:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
     engines: {node: '>=6'}
@@ -275,6 +270,60 @@ packages:
   jsonparse@1.3.1:
     resolution: {integrity: sha512-POQXvpdL69+CluYsillJ7SUhKvytYjW9vG/GKpnf+xP8UWgYEM/RaMzHHofbALDiKbbP1W8UEYmgGl39WkPZsg==}
     engines: {'0': node >= 0.2.0}
+
+  lefthook-darwin-arm64@1.11.11:
+    resolution: {integrity: sha512-E4jbCkSYClOwrMbbDCuTCZcD6PL3w2aJkBVZQAA/0xAcfETKj4ud1Xe3FzqBCHFIs4OJBtI8FUzbyoM+XpgSUA==}
+    cpu: [arm64]
+    os: [darwin]
+
+  lefthook-darwin-x64@1.11.11:
+    resolution: {integrity: sha512-fQ+kN+aVRPQQPkMqwCCZSENZ+l0R6O8lefNbWrZ05PumN9BJqUIKBB2dm88UfnGzAeg5YQvwoTH0H/BV8lKIEA==}
+    cpu: [x64]
+    os: [darwin]
+
+  lefthook-freebsd-arm64@1.11.11:
+    resolution: {integrity: sha512-FnsvTeRvZ2p09DzOdMoYe5APtVEcfSWUpbJUvJ79yKnWd+E7OTaqgHJ0mV7lz48uZeaCmBa2RMwB+BhKi/LaUA==}
+    cpu: [arm64]
+    os: [freebsd]
+
+  lefthook-freebsd-x64@1.11.11:
+    resolution: {integrity: sha512-jnkfnaBQHBrv2SAsgGPx90JdCuNUfiTWm9kcvOiW6MQs2IkptlAYa+xkkp2QNDhhtcF+4wVSbTqLgDZ/j9Xr0w==}
+    cpu: [x64]
+    os: [freebsd]
+
+  lefthook-linux-arm64@1.11.11:
+    resolution: {integrity: sha512-3SO2srRpKR/XR7HeC8J1yaCiYH8wsKZyM7jLAwiGQxoF425+iEQmAZIYv3P/eEtt8Tnwtdzaz5uGwZlrN3Io8Q==}
+    cpu: [arm64]
+    os: [linux]
+
+  lefthook-linux-x64@1.11.11:
+    resolution: {integrity: sha512-/qz/PAe8fT+/7U9VZxFwVqIlJCAdfGQ6Fsy5399sBmwBBV0fa09ibMqQLdUkXJv5ZP1Lp8JzsJinz8eeMQTgfA==}
+    cpu: [x64]
+    os: [linux]
+
+  lefthook-openbsd-arm64@1.11.11:
+    resolution: {integrity: sha512-mkNgdOClVqIT4JQakRXrY1iAXA8k+y/PiVlqtRVxPWVjx47tSMQHC0U+ef2d9JmYHh4Dk8htRX8D0rpkiMudkA==}
+    cpu: [arm64]
+    os: [openbsd]
+
+  lefthook-openbsd-x64@1.11.11:
+    resolution: {integrity: sha512-Chhf5lRrrc6FdfYsbfjbV8pY1ZQJ0D6Jkq07WKSCusL/NVRCzg4uxWzD3tyJMtFwy2gMbmup4/P0sX/e6jcy8A==}
+    cpu: [x64]
+    os: [openbsd]
+
+  lefthook-windows-arm64@1.11.11:
+    resolution: {integrity: sha512-253PgkB58+tI9EmqqbjRCyD3P73njdE14zTmrfMjZK1gIlKLZiPFq3K1YgRGh/OOieKdAum4LxlGKkhXg4w3ZQ==}
+    cpu: [arm64]
+    os: [win32]
+
+  lefthook-windows-x64@1.11.11:
+    resolution: {integrity: sha512-n+r5RtXCVqKNYc3AR1Vj2NQKKg2Fu79NsmqiiEA7S6ahG+DOqagI7PeJWM1PIqlRid50JyYNM2mWxb7DAe0ZFw==}
+    cpu: [x64]
+    os: [win32]
+
+  lefthook@1.11.11:
+    resolution: {integrity: sha512-TZAbpT13+grDIMwmdvGCEVLsJCwRDCcQjUyeoUFUDJZyc9E4Oztjo0cwaLX9CMGF68ISmj1arRg6KgvU2e/oEg==}
+    hasBin: true
 
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
@@ -393,8 +442,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  undici-types@6.20.0:
-    resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
+  undici-types@6.21.0:
+    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
   unicorn-magic@0.1.0:
     resolution: {integrity: sha512-lRfVq8fE8gz6QMBuDM6a+LO3IAzTi05H6gCVaUpir2E1Rwpo4ZUog45KpNXKC/Mn3Yb9UDuHumeFTo9iV/D9FQ==}
@@ -416,8 +465,8 @@ packages:
     resolution: {integrity: sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==}
     engines: {node: '>=12'}
 
-  yocto-queue@1.2.0:
-    resolution: {integrity: sha512-KHBC7z61OJeaMGnF3wqNZj+GGNXOyypZviiKpQeiHirG5Ib1ImwcLBH70rbMSkKfSmUNBsdf2PwaEJtKvgmkNw==}
+  yocto-queue@1.2.1:
+    resolution: {integrity: sha512-AyeEbWOu/TAXdxlV9wmGcR0+yh2j3vYPGOECcIj2S7MkrLyC7ne+oye2BKTItt0ii2PHk4cDy+95+LshzbXnGg==}
     engines: {node: '>=12.20'}
 
 snapshots:
@@ -430,11 +479,11 @@ snapshots:
 
   '@babel/helper-validator-identifier@7.25.9': {}
 
-  '@commitlint/cli@19.8.0(@types/node@22.13.0)(typescript@5.4.5)':
+  '@commitlint/cli@19.8.0(@types/node@22.15.3)(typescript@5.4.5)':
     dependencies:
       '@commitlint/format': 19.8.0
       '@commitlint/lint': 19.8.0
-      '@commitlint/load': 19.8.0(@types/node@22.13.0)(typescript@5.4.5)
+      '@commitlint/load': 19.8.0(@types/node@22.15.3)(typescript@5.4.5)
       '@commitlint/read': 19.8.0
       '@commitlint/types': 19.8.0
       tinyexec: 0.3.2
@@ -481,7 +530,7 @@ snapshots:
       '@commitlint/rules': 19.8.0
       '@commitlint/types': 19.8.0
 
-  '@commitlint/load@19.8.0(@types/node@22.13.0)(typescript@5.4.5)':
+  '@commitlint/load@19.8.0(@types/node@22.15.3)(typescript@5.4.5)':
     dependencies:
       '@commitlint/config-validator': 19.8.0
       '@commitlint/execute-rule': 19.8.0
@@ -489,7 +538,7 @@ snapshots:
       '@commitlint/types': 19.8.0
       chalk: 5.4.1
       cosmiconfig: 9.0.0(typescript@5.4.5)
-      cosmiconfig-typescript-loader: 6.1.0(@types/node@22.13.0)(cosmiconfig@9.0.0(typescript@5.4.5))(typescript@5.4.5)
+      cosmiconfig-typescript-loader: 6.1.0(@types/node@22.15.3)(cosmiconfig@9.0.0(typescript@5.4.5))(typescript@5.4.5)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -542,11 +591,11 @@ snapshots:
 
   '@types/conventional-commits-parser@5.0.1':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.15.3
 
-  '@types/node@22.13.0':
+  '@types/node@22.15.3':
     dependencies:
-      undici-types: 6.20.0
+      undici-types: 6.21.0
 
   JSONStream@1.3.5:
     dependencies:
@@ -606,9 +655,9 @@ snapshots:
       meow: 12.1.1
       split2: 4.2.0
 
-  cosmiconfig-typescript-loader@6.1.0(@types/node@22.13.0)(cosmiconfig@9.0.0(typescript@5.4.5))(typescript@5.4.5):
+  cosmiconfig-typescript-loader@6.1.0(@types/node@22.15.3)(cosmiconfig@9.0.0(typescript@5.4.5))(typescript@5.4.5):
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.15.3
       cosmiconfig: 9.0.0(typescript@5.4.5)
       jiti: 2.4.2
       typescript: 5.4.5
@@ -660,8 +709,6 @@ snapshots:
     dependencies:
       ini: 4.1.1
 
-  husky@9.1.7: {}
-
   import-fresh@3.3.1:
     dependencies:
       parent-module: 1.0.1
@@ -695,6 +742,49 @@ snapshots:
 
   jsonparse@1.3.1: {}
 
+  lefthook-darwin-arm64@1.11.11:
+    optional: true
+
+  lefthook-darwin-x64@1.11.11:
+    optional: true
+
+  lefthook-freebsd-arm64@1.11.11:
+    optional: true
+
+  lefthook-freebsd-x64@1.11.11:
+    optional: true
+
+  lefthook-linux-arm64@1.11.11:
+    optional: true
+
+  lefthook-linux-x64@1.11.11:
+    optional: true
+
+  lefthook-openbsd-arm64@1.11.11:
+    optional: true
+
+  lefthook-openbsd-x64@1.11.11:
+    optional: true
+
+  lefthook-windows-arm64@1.11.11:
+    optional: true
+
+  lefthook-windows-x64@1.11.11:
+    optional: true
+
+  lefthook@1.11.11:
+    optionalDependencies:
+      lefthook-darwin-arm64: 1.11.11
+      lefthook-darwin-x64: 1.11.11
+      lefthook-freebsd-arm64: 1.11.11
+      lefthook-freebsd-x64: 1.11.11
+      lefthook-linux-arm64: 1.11.11
+      lefthook-linux-x64: 1.11.11
+      lefthook-openbsd-arm64: 1.11.11
+      lefthook-openbsd-x64: 1.11.11
+      lefthook-windows-arm64: 1.11.11
+      lefthook-windows-x64: 1.11.11
+
   lines-and-columns@1.2.4: {}
 
   locate-path@7.2.0:
@@ -727,7 +817,7 @@ snapshots:
 
   p-limit@4.0.0:
     dependencies:
-      yocto-queue: 1.2.0
+      yocto-queue: 1.2.1
 
   p-locate@6.0.0:
     dependencies:
@@ -778,7 +868,7 @@ snapshots:
 
   typescript@5.4.5: {}
 
-  undici-types@6.20.0: {}
+  undici-types@6.21.0: {}
 
   unicorn-magic@0.1.0: {}
 
@@ -802,4 +892,4 @@ snapshots:
       y18n: 5.0.8
       yargs-parser: 21.1.1
 
-  yocto-queue@1.2.0: {}
+  yocto-queue@1.2.1: {}

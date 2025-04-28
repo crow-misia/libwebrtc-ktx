@@ -56,3 +56,7 @@ core/.cxx/
 
 # Kotlin
 .kotlin
+
+# Lefthook
+lefthook-local.*
+
