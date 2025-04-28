@@ -5,7 +5,7 @@
   "dependencies": {
     "@commitlint/cli": "19.8.0",
     "@commitlint/config-conventional": "19.8.0",
-    "lefthook": "1.11.11",
+    "lefthook": "1.11.12",
     "npm-check-updates": "18.0.1"
   },
   "packageManager": "pnpm@10.10.0"
