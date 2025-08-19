@@ -2,7 +2,7 @@
 
 [versions]
 
-android-gradle-plugin = "8.12.0"
+android-gradle-plugin = "8.12.1"
 
 kotlin = "2.2.10"
 
@@ -22,7 +22,7 @@ detekt = "1.23.8"
 
 dokka = "2.0.0"
 
-kotest = "5.9.1"
+kotest = "6.0.0"
 
 maven-publish = "0.34.0"
 
@@ -58,7 +58,7 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test" }
 
-libwebrtc-bin = { group = "com.github.crow-misia", name = "libwebrtc-bin", version = "139.7258.3.0" }
+libwebrtc-bin = { group = "com.github.crow-misia", name = "libwebrtc-bin", version = "140.7339.0.0" }
 
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 
