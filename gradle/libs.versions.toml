@@ -2,7 +2,7 @@
 
 [versions]
 
-android-gradle-plugin = "8.12.1"
+android-gradle-plugin = "8.12.2"
 
 kotlin = "2.2.10"
 
