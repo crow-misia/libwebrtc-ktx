@@ -17,14 +17,17 @@ class RTCComponentFactory(
         private val TAG = RTCComponentFactory::class.simpleName
     }
 
+    @JvmOverloads
     fun createPeerConnectionFactory(
         context: Context,
+        options: PeerConnectionFactory.Options = PeerConnectionFactory.Options(),
+        fieldTrials: String? = null,
         errorCallback: (errorReason: ErrorReason, errorMessage: String) -> Unit,
     ): PeerConnectionFactory {
         WebRtcLogger.d(TAG, "createPeerConnectionFactory")
 
-        val options = PeerConnectionFactory.Options()
         val factoryBuilder = PeerConnectionFactory.builder()
+            .setFieldTrials(fieldTrials)
             .setOptions(options)
 
         WebRtcLogger.d(TAG, "videoEncoderFactory: %s", option.videoEncoderFactory)

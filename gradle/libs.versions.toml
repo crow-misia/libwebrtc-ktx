@@ -24,6 +24,8 @@ dokka = "2.0.0"
 
 kotest = "6.0.3"
 
+libwebrtc = "140.7339.1.0"
+
 maven-publish = "0.34.0"
 
 mockk = "1.14.5"
@@ -58,7 +60,7 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test" }
 
-libwebrtc-bin = { group = "com.github.crow-misia", name = "libwebrtc-bin", version = "140.7339.1.0" }
+libwebrtc-bin = { group = "com.github.crow-misia", name = "libwebrtc-bin", version.ref = "libwebrtc" }
 
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 
