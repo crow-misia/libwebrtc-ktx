@@ -13,7 +13,6 @@ import org.webrtc.PeerConnectionFactory
 @JvmOverloads
 fun Application.initializePeerConnectionFactory(
     useTracer: Boolean = false,
-    fieldTrials: String? = null,
     loggableSeverity: Logging.Severity = Logging.Severity.LS_NONE,
     nativeLibraryName: String? = null,
     nativeLibraryLoader: NativeLibraryLoader? = null,
@@ -21,7 +20,6 @@ fun Application.initializePeerConnectionFactory(
     val options = PeerConnectionFactory.InitializationOptions.builder(this).also { builder ->
         builder.setEnableInternalTracer(useTracer)
         builder.setInjectableLogger(generateInjectableLogger(loggableSeverity), loggableSeverity)
-        fieldTrials?.also { builder.setFieldTrials(it) }
         nativeLibraryName?.also { builder.setNativeLibraryName(it) }
         nativeLibraryLoader?.also { builder.setNativeLibraryLoader(it) }
     }.createInitializationOptions()
