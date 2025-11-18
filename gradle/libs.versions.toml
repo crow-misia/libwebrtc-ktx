@@ -26,7 +26,7 @@ kotest = "6.0.4"
 
 libwebrtc = "141.7390.2.0"
 
-maven-publish = "0.34.0"
+maven-publish = "0.35.0"
 
 mockk = "1.14.6"
 
