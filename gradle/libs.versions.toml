@@ -22,13 +22,13 @@ detekt = "1.23.8"
 
 dokka = "2.1.0"
 
-kotest = "6.1.1"
+kotest = "6.1.2"
 
 libwebrtc = "141.7390.2.0"
 
 maven-publish = "0.36.0"
 
-mockk = "1.14.7"
+mockk = "1.14.9"
 
 truth = "1.4.5"
 
