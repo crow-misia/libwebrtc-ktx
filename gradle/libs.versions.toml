@@ -6,7 +6,7 @@ android-gradle-plugin = "8.13.2"
 
 kotlin = "2.3.21"
 
-kotlinx-coroutines = "1.10.2"
+kotlinx-coroutines = "1.11.0"
 
 androidx-test-espresso = "3.7.0"
 
