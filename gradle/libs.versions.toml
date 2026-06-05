@@ -2,7 +2,7 @@
 
 [versions]
 
-android-gradle-plugin = "8.13.2"
+android-gradle-plugin = "9.2.1"
 
 kotlin = "2.3.21"
 
@@ -28,7 +28,7 @@ libwebrtc = "141.7390.2.0"
 
 maven-publish = "0.36.0"
 
-mockk = "1.14.9"
+mockk = "1.14.11"
 
 truth = "1.4.5"
 
