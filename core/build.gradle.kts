@@ -8,7 +8,6 @@ plugins {
     alias(libs.plugins.detekt)
     alias(libs.plugins.dokka)
     alias(libs.plugins.dokka.javadoc)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.maven.publish)
     id("signing")
 }
@@ -79,9 +78,7 @@ kotlin {
 }
 
 dependencies {
-    compileOnly(platform(libs.kotlin.bom))
     compileOnly(libs.kotlin.stdlib)
-    compileOnly(platform(libs.kotlinx.coroutines.bom))
     compileOnly(libs.kotlinx.coroutines.core)
 
     compileOnly(libs.libwebrtc.bin)
