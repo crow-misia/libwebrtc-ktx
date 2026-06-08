@@ -24,7 +24,7 @@ dokka = "2.2.0"
 
 kotest = "6.1.11"
 
-libwebrtc = "141.7390.2.0"
+libwebrtc = "149.7827.5.0"
 
 maven-publish = "0.36.0"
 
