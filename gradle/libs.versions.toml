@@ -2,9 +2,9 @@
 
 [versions]
 
-android-gradle-plugin = "9.2.1"
+android-gradle-plugin = "9.3.1"
 
-kotlin = "2.4.0"
+kotlin = "2.4.10"
 
 kotlinx-coroutines = "1.11.0"
 
@@ -22,7 +22,7 @@ detekt = "1.23.8"
 
 dokka = "2.2.0"
 
-kotest = "6.2.1"
+kotest = "6.2.3"
 
 libwebrtc = "149.7827.5.0"
 
